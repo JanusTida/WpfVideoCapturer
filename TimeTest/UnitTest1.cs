@@ -10,6 +10,7 @@ using CDFCEntities.Structs;
 namespace TimeTest {
     [TestClass]
     public class UnitTest1 {
+
         #region
         [DllImport("cdfcproject2.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.Cdecl, EntryPoint = "cdfc_dh_nvr_filesave")]
         public extern static bool cdfc_object2_filesave(IntPtr szFile, IntPtr hDisk, IntPtr saveFileHandle, IntPtr nCurrSizeDW, IntPtr nError);
