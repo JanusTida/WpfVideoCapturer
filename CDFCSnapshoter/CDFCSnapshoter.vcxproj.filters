@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DHMemPLayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DHMemPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\aacdec.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\adpcmdec.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\amrdec.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\dhplay.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\fisheye.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\g729dec.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\g7221dec.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\h26ldec.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\h264dec.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\H264Parser.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\hevcdec.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\HevcParser.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\HWDec.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\MCL_FPTZ.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\mjpegdec.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\mp2dec.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\mp3dec.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\mpeg4dec.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\mpeg4enc.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\oggdec.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\postproc.dll" />
+    <None Include="C:\Users\Janus\Downloads\generalpaysdkchnwindows32is\库文件\svac_dec.dll" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,821 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CDFCVideoExactor.Controls"
+             xmlns:cvts="clr-namespace:CDFCConverters.Converters.DeviceSelectorPage;assembly=CDFCConverters"
+            xmlns:publicCvts="clr-namespace:CDFCConverters.Converters;assembly=CDFCConverters"
+             xmlns:Custom="http://metro.mahapps.com/winfx/xaml/controls" 
+    xmlns:Custom1="http://metro.mahapps.com/winfx/xaml/shared" 
+        x:Class="CDFCVideoExactor.Controls.DeviceSelectorPage"
+             xmlns:metros="http://metro.mahapps.com/winfx/xaml/controls"
+                xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             mc:Ignorable="d" Loaded="DeviceSelectorPage_Loaded"
+             d:DesignHeight="900" d:DesignWidth="1440">
+    <UserControl.Resources>
+        <XmlDataProvider x:Key="xdp" XPath="FileSystem/Node"/>
+
+        <cvts:NodeTypeToVisibilityConverter x:Key="nodeTypeToViCVT"/>
+        <cvts:StringEqualToVisibilityConverter x:Key="StringEqualToVisibilityConverter"/>
+        <publicCvts:ByteSizeToSizeConverter x:Key="byteSizeToSizeConverter"/>
+        <cvts:LevelToIdentConverter x:Key="LevelToIdentConverters"/>
+        <cvts:BooleanToForegroundConverter x:Key="BooleanToForegroundConverter"/>
+        <cvts:LevelToIconMarginConverter x:Key="LevelToIconMarginConverter"/>
+        <publicCvts:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+
+        <Style x:Key="GridViewColumnHeaderTemplate" TargetType="{x:Type GridViewColumnHeader}">
+            <Setter Property="Custom:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="29,0,29,0"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Height" Value="41"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                        <Grid>
+                            <Rectangle Fill="#161616"  IsHitTestVisible="True"/>
+                            <Border x:Name="HeaderBorder"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="Gainsboro"  >
+                                <Custom:ContentControlEx x:Name="HeaderContent" ContentCharacterCasing="{Binding (Custom:ControlsHelper.ContentCharacterCasing), RelativeSource={RelativeSource TemplatedParent}}" 
+                                                         ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" 
+                                                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"  Padding="{TemplateBinding Padding}"
+                                                         RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                                         Style="{DynamicResource ColumnHeaderControlExTemplate}"/>
+                            </Border>
+                            <Thumb x:Name="PART_HeaderGripper" HorizontalAlignment="Right" Margin="0,0,-9,0">
+                                <Thumb.Style>
+                                    <Style TargetType="{x:Type Thumb}">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Width" Value="0"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Thumb}">
+                                                    <Border Background="Transparent" Padding="{TemplateBinding Padding}">
+                                                        <Rectangle Fill="{TemplateBinding Background}" HorizontalAlignment="Center" Width="0"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Thumb.Style>
+                            </Thumb>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Margin" TargetName="HeaderContent" Value="1,1,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="Role" Value="Floating">
+                    <Setter Property="Opacity" Value="0.7"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                <Canvas x:Name="PART_FloatingHeaderCanvas">
+                                    <Rectangle Fill="#60000000" Height="{TemplateBinding ActualHeight}" Width="{TemplateBinding ActualWidth}"/>
+                                </Canvas>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="ExpandCollapseToggleStyle" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border Width="24" >
+                            <Path x:Name="ExpandPath" HorizontalAlignment="Right" VerticalAlignment="Center"
+    							Fill="Transparent" Stroke="#FFE6E6E6" Data="M 0 0 L 0 24 L 20 12 Z"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                    <Condition Property="IsChecked" Value="False"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Stroke" TargetName="ExpandPath" Value="#FF1BBBFA"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Data" TargetName="ExpandPath" Value="M 0 0 L 12 20 L 24 0 Z"/>
+                                <Setter Property="Fill" TargetName="ExpandPath" Value="#FFE6E6E6"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                    <Condition Property="IsChecked" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Stroke" TargetName="ExpandPath" Value="#FF1BBBFA"/>
+                                <Setter Property="Fill" TargetName="ExpandPath" Value="#FF1BBBFA"/>
+                            </MultiTrigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="StorageStateProgressBarStyle" TargetType="{x:Type metros:MetroProgressBar}">
+            <Setter Property="Foreground" >
+                <Setter.Value>
+                    <SolidColorBrush Color="#b3b3b3"/>
+                </Setter.Value>
+                <!--<Setter.Value>
+                    <Binding  RelativeSource="{RelativeSource Mode=FindAncestor,AncestorType={x:Type TreeViewItem}}" Path="IsSelected" Converter="{StaticResource BooleanToForegroundConverter}"  >
+                    </Binding>
+                </Setter.Value>-->
+            </Setter>
+            <Setter Property="Background" Value="#7c7c7c"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Maximum" Value="100"/>
+            <Setter Property="MinHeight" Value="12"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type metros:MetroProgressBar}">
+                        <ControlTemplate.Resources>
+                            <Storyboard x:Key="IndeterminateStoryboard" RepeatBehavior="Forever">
+                                <DoubleAnimation x:Name="MainDoubleAnim" Duration="0:0:3.917" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="EllipseGrid"/>
+                                <DoubleAnimationUsingKeyFrames x:Name="E1Anim" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="E1">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                    <SplineDoubleKeyFrame KeySpline="0.4,0,0.6,1" KeyTime="0:0:1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:2"/>
+                                    <SplineDoubleKeyFrame KeySpline="0.4,0,0.6,1" KeyTime="0:0:3"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames x:Name="E2Anim" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="E2">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.167" Value="0"/>
+                                    <SplineDoubleKeyFrame KeySpline="0.4,0,0.6,1" KeyTime="0:0:1.167"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:2.167"/>
+                                    <SplineDoubleKeyFrame KeySpline="0.4,0,0.6,1" KeyTime="0:0:3.167"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames x:Name="E3Anim" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="E3">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.333" Value="0"/>
+                                    <SplineDoubleKeyFrame KeySpline="0.4,0,0.6,1" KeyTime="0:0:1.333"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:2.333"/>
+                                    <SplineDoubleKeyFrame KeySpline="0.4,0,0.6,1" KeyTime="0:0:3.333"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames x:Name="E4Anim" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="E4">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                                    <SplineDoubleKeyFrame KeySpline="0.4,0,0.6,1" KeyTime="0:0:1.5"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:2.5"/>
+                                    <SplineDoubleKeyFrame KeySpline="0.4,0,0.6,1" KeyTime="0:0:3.5"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames x:Name="E5Anim" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="E5">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.667" Value="0"/>
+                                    <SplineDoubleKeyFrame KeySpline="0.4,0,0.6,1" KeyTime="0:0:1.667"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:2.667"/>
+                                    <SplineDoubleKeyFrame KeySpline="0.4,0,0.6,1" KeyTime="0:0:3.667"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="B1">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="-50"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:3" Value="100"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="B2">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="-50"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.667" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:2.167" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:3.167" Value="100"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="B3">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="-50"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.833" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:2.333" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:3.333" Value="100"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="B4">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="-50"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:2.5" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:3.5" Value="100"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)" Storyboard.TargetName="B5">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="-50"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:1.167" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:2.667" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:3.667" Value="100"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="EllipseGrid"/>
+                                <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="DeterminateRoot"/>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="E1">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:3" Value="1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:3" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="E2">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.167" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.167" Value="1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:3.167" Value="1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:3.167" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="E3">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.333" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.333" Value="1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:3.333" Value="1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:3.333" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="E4">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:3.5" Value="1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:3.5" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity" Storyboard.TargetName="E5">
+                                    <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.667" Value="0"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:0.667" Value="1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:3.667" Value="1"/>
+                                    <EasingDoubleKeyFrame KeyTime="0:0:3.667" Value="0"/>
+                                </DoubleAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </ControlTemplate.Resources>
+                        <Grid x:Name="ContainingGrid" ClipToBounds="True">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Determinate"/>
+                                    <VisualState x:Name="Indeterminate"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid x:Name="EllipseGrid" Opacity="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RenderTransform>
+                                    <TranslateTransform/>
+                                </Grid.RenderTransform>
+                                <Border x:Name="B1" Grid.Column="8" CornerRadius="9" RenderTransformOrigin="0.5,0.5">
+                                    <Border.RenderTransform>
+                                        <TranslateTransform/>
+                                    </Border.RenderTransform>
+                                    <Ellipse x:Name="E1" Fill="{TemplateBinding Foreground}" 
+                                             Height="{Binding EllipseDiameter, RelativeSource={RelativeSource TemplatedParent}}"
+                                             RenderTransformOrigin="0.5,0.5" Width="{Binding EllipseDiameter, RelativeSource={RelativeSource TemplatedParent}}">
+                                        <Ellipse.RenderTransform>
+                                            <TranslateTransform/>
+                                        </Ellipse.RenderTransform>
+                                    </Ellipse>
+                                </Border>
+                                <Rectangle Grid.Column="7"  Width="{Binding EllipseOffset, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <Border x:Name="B2" Grid.Column="6" RenderTransformOrigin="0.5,0.5" CornerRadius="9">
+                                    <Border.RenderTransform>
+                                        <TranslateTransform/>
+                                    </Border.RenderTransform>
+                                    <Ellipse x:Name="E2" Fill="{TemplateBinding Foreground}" Height="{Binding EllipseDiameter, RelativeSource={RelativeSource TemplatedParent}}" RenderTransformOrigin="0.5,0.5" Width="{Binding EllipseDiameter, RelativeSource={RelativeSource TemplatedParent}}">
+                                        <Ellipse.RenderTransform>
+                                            <TranslateTransform/>
+                                        </Ellipse.RenderTransform>
+                                    </Ellipse>
+                                </Border>
+                                <Rectangle Grid.Column="5" Width="{Binding EllipseOffset, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <Border x:Name="B3" Grid.Column="4" RenderTransformOrigin="0.5,0.5" CornerRadius="9">
+                                    <Border.RenderTransform>
+                                        <TranslateTransform/>
+                                    </Border.RenderTransform>
+                                    <Ellipse x:Name="E3" Fill="{TemplateBinding Foreground}" Height="{Binding EllipseDiameter, RelativeSource={RelativeSource TemplatedParent}}" RenderTransformOrigin="0.5,0.5" Width="{Binding EllipseDiameter, RelativeSource={RelativeSource TemplatedParent}}">
+                                        <Ellipse.RenderTransform>
+                                            <TranslateTransform/>
+                                        </Ellipse.RenderTransform>
+                                    </Ellipse>
+                                </Border>
+                                <Rectangle Grid.Column="3" Width="{Binding EllipseOffset, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <Border x:Name="B4" Grid.Column="2" RenderTransformOrigin="0.5,0.5" >
+                                    <Border.RenderTransform>
+                                        <TranslateTransform/>
+                                    </Border.RenderTransform>
+                                    <Ellipse x:Name="E4" Fill="{TemplateBinding Foreground}"  Height="{Binding EllipseDiameter, RelativeSource={RelativeSource TemplatedParent}}" RenderTransformOrigin="0.5,0.5" Width="{Binding EllipseDiameter, RelativeSource={RelativeSource TemplatedParent}}">
+                                        <Ellipse.RenderTransform>
+                                            <TranslateTransform/>
+                                        </Ellipse.RenderTransform>
+                                    </Ellipse>
+                                </Border>
+                                <Rectangle Grid.Column="1" Width="{Binding EllipseOffset, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <Border x:Name="B5" Grid.Column="0" RenderTransformOrigin="0.5,0.5">
+                                    <Border.RenderTransform>
+                                        <TranslateTransform/>
+                                    </Border.RenderTransform>
+                                    <Ellipse x:Name="E5" Fill="{TemplateBinding Foreground}" Height="{Binding EllipseDiameter, RelativeSource={RelativeSource TemplatedParent}}" RenderTransformOrigin="0.5,0.5" Width="{Binding EllipseDiameter, RelativeSource={RelativeSource TemplatedParent}}">
+                                        <Ellipse.RenderTransform>
+                                            <TranslateTransform/>
+                                        </Ellipse.RenderTransform>
+                                    </Ellipse>
+                                </Border>
+                            </Grid>
+                            <Border x:Name="DeterminateRoot" Opacity="0">
+                                <Grid Margin="{TemplateBinding Padding}">
+                                    <Border x:Name="PART_Track" BorderBrush="{TemplateBinding BorderBrush}" CornerRadius="0,2,2,0"  BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"/>
+                                    <Border x:Name="PART_Indicator" Background="{TemplateBinding Foreground}" CornerRadius="0,4,4,0" HorizontalAlignment="Left"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsIndeterminate" Value="False">
+                                <Setter Property="Opacity" TargetName="DeterminateRoot" Value="1"/>
+                            </Trigger>
+                            <Trigger Property="Orientation" Value="Vertical">
+                                <Setter Property="LayoutTransform" TargetName="ContainingGrid">
+                                    <Setter.Value>
+                                        <RotateTransform Angle="270"/>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                                <Setter Property="MinHeight" Value="0"/>
+                                <Setter Property="MinWidth" Value="6"/>
+                                <Setter Property="Width" TargetName="ContainingGrid" Value="{Binding Height, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <Setter Property="Height" TargetName="ContainingGrid" Value="{Binding Width, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <GridViewColumnCollection x:Key="gvcc">
+            <GridViewColumn >
+                <GridViewColumnHeader Width="147" >
+                    <GridViewColumnHeader.Style>
+                        <Style BasedOn="{StaticResource GridViewColumnHeaderTemplate}" TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="Template" >
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                        <Grid>
+                                            <Border Background="#161616" x:Name="HeaderBorder" CornerRadius="6,0,0,0"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="Transparent"  >
+                                                <Custom:ContentControlEx x:Name="HeaderContent" ContentCharacterCasing="{Binding (Custom:ControlsHelper.ContentCharacterCasing), RelativeSource={RelativeSource TemplatedParent}}" 
+                                                         ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" 
+                                                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"  Padding="{TemplateBinding Padding}"
+                                                         RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                                         Style="{DynamicResource ColumnHeaderControlExTemplate}"/>
+                                            </Border>
+                                            <Thumb x:Name="PART_HeaderGripper" HorizontalAlignment="Right" Margin="0,0,-9,0">
+                                                <Thumb.Style>
+                                                    <Style TargetType="{x:Type Thumb}">
+                                                        <Setter Property="Background" Value="Transparent"/>
+                                                        <Setter Property="Width" Value="0"/>
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="{x:Type Thumb}">
+                                                                    <Border Background="Transparent" Padding="{TemplateBinding Padding}">
+                                                                        <Rectangle Fill="{TemplateBinding Background}" HorizontalAlignment="Center" Width="0"/>
+                                                                    </Border>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </Thumb.Style>
+                                            </Thumb>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background" TargetName="HeaderBorder" Value="{DynamicResource GrayBrush8}"/>
+                                                <Setter Property="Margin" TargetName="HeaderContent" Value="1,1,0,0"/>
+                                            </Trigger>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GridViewColumnHeader.Style>
+                </GridViewColumnHeader>
+                <GridViewColumn.CellTemplate>
+                    <DataTemplate >
+                        <Border  >
+                            <DockPanel >
+                                <ToggleButton x:Name="Expander" 
+    					Style="{StaticResource ExpandCollapseToggleStyle}" 
+    					IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}}"
+    					ClickMode="Press"/>
+                                <Image Margin="{Binding XPath=@Level,Converter={StaticResource LevelToIconMarginConverter}}" 
+    					Stretch="None" Source="{Binding XPath=@IconPath}"/>
+
+                            </DockPanel>
+                        </Border>
+                        <DataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding HasItems, RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}}}" 
+    				Value="False">
+                                <Setter TargetName="Expander"
+    					Property="Visibility"
+    					Value="Hidden"/>
+                            </DataTrigger>
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </GridViewColumn.CellTemplate>
+            </GridViewColumn>
+            <GridViewColumn >
+                <GridViewColumn.CellTemplate>
+                    <DataTemplate>
+                        <Border  >
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding XPath=@DeviceID}" Margin="0,0,10,0" VerticalAlignment="Center" MinWidth="10"/>
+                                <TextBlock  Text="{Binding XPath=@Name}" Margin="0,0,10,0" VerticalAlignment="Center" MinWidth="18.5"   />
+                                <metros:MetroProgressBar Value="{Binding XPath=@ElapsedValue}"
+                                                         Visibility="{Binding XPath=@Type,Converter={StaticResource StringEqualToVisibilityConverter},ConverterParameter=Partition}"
+                                                         x:Name="StorageStateProgressBar" Style="{StaticResource StorageStateProgressBarStyle}" Width="100"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </GridViewColumn.CellTemplate>
+                <GridViewColumnHeader  HorizontalContentAlignment="Center"  Style="{DynamicResource GridViewColumnHeaderTemplate}">
+                    <TextBlock Text="{DynamicResource DeviceName}"  />
+                </GridViewColumnHeader>
+            </GridViewColumn>
+            <GridViewColumn   >
+                <GridViewColumnHeader  Style="{StaticResource GridViewColumnHeaderTemplate}" >
+                    <TextBlock Text="{DynamicResource FileSystem}"/>
+                </GridViewColumnHeader>
+                <GridViewColumn.CellTemplate>
+                    <DataTemplate>
+                        <Border HorizontalAlignment="Stretch">
+                            <DockPanel>
+                                <TextBlock VerticalAlignment="Center" TextAlignment="Center" Text="{Binding XPath=@FileSystemType}"  />
+                            </DockPanel>
+                        </Border>
+                    </DataTemplate>
+                </GridViewColumn.CellTemplate>
+            </GridViewColumn>
+            <GridViewColumn >
+                <GridViewColumnHeader  Style="{StaticResource GridViewColumnHeaderTemplate}" >
+                    <TextBlock Text="{DynamicResource ElapsedSpace}"/>
+                </GridViewColumnHeader>
+                <GridViewColumn.CellTemplate>
+                    <DataTemplate>
+                        <Border   HorizontalAlignment="Stretch">
+                            <DockPanel>
+                                <TextBlock VerticalAlignment="Center" TextAlignment="Center" Text="{Binding XPath=@ElapsedSpace,Converter={StaticResource byteSizeToSizeConverter},ConverterParameter=1}"  />
+                            </DockPanel>
+                        </Border>
+                    </DataTemplate>
+                </GridViewColumn.CellTemplate>
+            </GridViewColumn>
+            <GridViewColumn   >
+                <GridViewColumnHeader   Style="{StaticResource GridViewColumnHeaderTemplate}" >
+                    <TextBlock Text="{DynamicResource RemainingSpace}"/>
+                </GridViewColumnHeader>
+                <GridViewColumn.CellTemplate>
+                    <DataTemplate>
+                        <Border   HorizontalAlignment="Stretch">
+                            <DockPanel>
+                                <TextBlock VerticalAlignment="Center" TextAlignment="Center" Text="{Binding XPath=@FreeSpace,Converter={StaticResource byteSizeToSizeConverter},ConverterParameter=1}"  />
+                            </DockPanel>
+                        </Border>
+                    </DataTemplate>
+                </GridViewColumn.CellTemplate>
+            </GridViewColumn>
+            <GridViewColumn  >
+                <GridViewColumnHeader  Style="{DynamicResource GridViewColumnHeaderTemplate}" >
+                    <TextBlock  Text="{DynamicResource TotalSize}"/>
+                </GridViewColumnHeader>
+                <GridViewColumn.CellTemplate>
+                    <DataTemplate>
+                        <Border   HorizontalAlignment="Stretch">
+                            <DockPanel>
+                                <TextBlock TextAlignment="Center" VerticalAlignment="Center" Text="{Binding XPath=@TotalSpace,Converter={StaticResource byteSizeToSizeConverter},ConverterParameter=0}"  />
+                            </DockPanel>
+                        </Border>
+                    </DataTemplate>
+                </GridViewColumn.CellTemplate>
+            </GridViewColumn>
+            <GridViewColumn >
+                <GridViewColumnHeader  >
+                    <TextBlock Text="C/H/S"/>
+                    <GridViewColumnHeader.Style>
+                        <Style BasedOn="{StaticResource GridViewColumnHeaderTemplate}" TargetType="{x:Type GridViewColumnHeader}">
+                            <Setter Property="Template" >
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                                        <Grid>
+                                            <Border Background="#161616" x:Name="HeaderBorder" CornerRadius="0,0,0,0"  BorderThickness="{TemplateBinding BorderThickness}" >
+                                                <Custom:ContentControlEx x:Name="HeaderContent" ContentCharacterCasing="{Binding (Custom:ControlsHelper.ContentCharacterCasing), RelativeSource={RelativeSource TemplatedParent}}" 
+                                                         ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" 
+                                                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"  Padding="{TemplateBinding Padding}"
+                                                         RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                                         Style="{DynamicResource ColumnHeaderControlExTemplate}"/>
+                                            </Border>
+                                            <Thumb x:Name="PART_HeaderGripper" HorizontalAlignment="Right" Margin="0,0,-9,0">
+                                                <Thumb.Style>
+                                                    <Style TargetType="{x:Type Thumb}">
+                                                        <Setter Property="Background" Value="Transparent"/>
+                                                        <Setter Property="Width" Value="0"/>
+                                                        <Setter Property="Template">
+                                                            <Setter.Value>
+                                                                <ControlTemplate TargetType="{x:Type Thumb}">
+                                                                    <Border Background="Transparent" Padding="{TemplateBinding Padding}">
+                                                                        <Rectangle Fill="{TemplateBinding Background}" HorizontalAlignment="Center" Width="0"/>
+                                                                    </Border>
+                                                                </ControlTemplate>
+                                                            </Setter.Value>
+                                                        </Setter>
+                                                    </Style>
+                                                </Thumb.Style>
+                                            </Thumb>
+                                        </Grid>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter Property="Background" TargetName="HeaderBorder" Value="{DynamicResource GrayBrush8}"/>
+                                                <Setter Property="Margin" TargetName="HeaderContent" Value="1,1,0,0"/>
+                                            </Trigger>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GridViewColumnHeader.Style>
+                </GridViewColumnHeader>
+                <GridViewColumn.CellTemplate>
+                    <DataTemplate>
+                        <Border   HorizontalAlignment="Stretch">
+                            <DockPanel>
+                                <TextBlock VerticalAlignment="Center" TextAlignment="Center" Text="{Binding XPath=@CHS}"  />
+                            </DockPanel>
+                        </Border>
+                    </DataTemplate>
+                </GridViewColumn.CellTemplate>
+            </GridViewColumn>
+        </GridViewColumnCollection>
+        
+        
+        <Style TargetType="{x:Type TreeViewItem}">
+            <Setter Property="IsExpanded" Value="True"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TreeViewItem}">
+                        <StackPanel>
+                            <Grid>
+                                <Rectangle x:Name="Brect" Height="48" Opacity="0.55" />
+                                <Border x:Name="Bd" Height="48"
+    							Background="{TemplateBinding Background}"
+    							BorderBrush="{TemplateBinding BorderBrush}"
+    							BorderThickness="{TemplateBinding BorderThickness}"
+    							Padding="{TemplateBinding Padding}">
+                                    <GridViewRowPresenter  x:Name="PART_Header"
+    								Content="{TemplateBinding Header}" 
+    								Columns="{StaticResource gvcc}" />
+                                </Border>
+                            </Grid>
+
+                            <ItemsPresenter x:Name="ItemsHost" >
+
+                            </ItemsPresenter>
+                        </StackPanel>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsExpanded"
+    							Value="false">
+                                <Setter TargetName="ItemsHost"
+    								Property="Visibility"
+    								Value="Collapsed"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="HasHeader"
+    									Value="false"/>
+                                    <Condition Property="Width"
+    									Value="Auto"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="PART_Header"
+    								Property="MinWidth"
+    								Value="75"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="HasHeader"
+    									Value="false"/>
+                                    <Condition Property="Height"
+    									Value="Auto"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="PART_Header"
+    								Property="MinHeight"
+    								Value="19"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="true"/>
+                                    <Condition Property="IsEnabled"  Value="true"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Fill"  TargetName="Brect" Value="#81C7FD"/>
+                                <Setter Property="Foreground"
+    								Value="#FFFFFF"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsSelected"
+    							Value="true">
+                                <Setter TargetName="Brect"
+    								Property="Fill"
+    								Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="Foreground"
+    								Value="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected"
+    									Value="true"/>
+                                    <Condition Property="IsSelectionActive"
+    									Value="false"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd"
+    								Property="Background"
+    								Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="Foreground"
+    								Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled"
+    							Value="false">
+                                <Setter Property="Foreground"
+    								Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="{x:Type TreeView}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TreeView}">
+                        <DockPanel>
+                            <GridViewHeaderRowPresenter Columns="{StaticResource gvcc}"  DockPanel.Dock="Top" />
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#1c1c1c" Template="{StaticResource ScrollViewerControlTemplate}" >
+                                <ItemsPresenter >
+                                </ItemsPresenter>
+                            </ScrollViewer>
+                        </DockPanel>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style  TargetType="{x:Type GridViewColumnHeader}" BasedOn="{StaticResource GridViewColumnHeaderTemplate}">
+            <Setter Property="Template" >
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GridViewColumnHeader}">
+                        <Grid>
+                            <Border Background="#161616" x:Name="HeaderBorder" CornerRadius="0,6,0,0"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="Transparent"  >
+                                <Custom:ContentControlEx x:Name="HeaderContent" ContentCharacterCasing="{Binding (Custom:ControlsHelper.ContentCharacterCasing), RelativeSource={RelativeSource TemplatedParent}}" 
+                                                         ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" 
+                                                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"  Padding="{TemplateBinding Padding}"
+                                                         RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
+                                                         Style="{DynamicResource ColumnHeaderControlExTemplate}"/>
+                            </Border>
+                            <Thumb x:Name="PART_HeaderGripper" HorizontalAlignment="Right" Margin="0,0,-9,0">
+                                <Thumb.Style>
+                                    <Style TargetType="{x:Type Thumb}">
+                                        <Setter Property="Background" Value="Transparent"/>
+                                        <Setter Property="Width" Value="0"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="{x:Type Thumb}">
+                                                    <Border Background="Transparent" Padding="{TemplateBinding Padding}">
+                                                        <Rectangle Fill="{TemplateBinding Background}" HorizontalAlignment="Center" Width="0"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Thumb.Style>
+                            </Thumb>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="HeaderBorder" Value="{DynamicResource GrayBrush8}"/>
+                                <Setter Property="Margin" TargetName="HeaderContent" Value="1,1,0,0"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ColumnHeaderControlExTemplate" TargetType="{x:Type Custom:ContentControlEx}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Focusable" Value="False"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Custom:ContentControlEx}">
+                        <Grid Background="Transparent" >
+                            <ContentPresenter x:Name="PART_ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                              Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" 
+                                              RecognizesAccessKey="{TemplateBinding RecognizesAccessKey}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                              UseLayoutRounding="{TemplateBinding UseLayoutRounding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="ContentCharacterCasing" Value="Normal">
+                                <Setter Property="Content" TargetName="PART_ContentPresenter" Value="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            </Trigger>
+                            <Trigger Property="ContentCharacterCasing" Value="Upper">
+                                <Setter Property="Content" TargetName="PART_ContentPresenter" Value="{Binding Content, Converter={Custom1:ToUpperConverter}, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            </Trigger>
+                            <Trigger Property="ContentCharacterCasing" Value="Lower">
+                                <Setter Property="Content" TargetName="PART_ContentPresenter" Value="{Binding Content, Converter={Custom1:ToLowerConverter}, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="SureBtnTemplate" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource GrayBrush10}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="metros:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
+            <Setter Property="metros:ControlsHelper.CornerRadius" Value="3"/>
+            <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+            <Setter Property="FontSize" Value="{DynamicResource UpperCaseContentFontSize}"/>
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="Padding" Value="5,6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border x:Name="Background"   CornerRadius="10" Width="87" Height="26" >
+
+                            </Border>
+                            <Image Stretch="None" x:Name="DefaultBackground" Source="/CDFCVideoExactor;component/Images/DeviceSelectorPage/btnSureIcon.png" />
+                            <Border x:Name="DisabledVisualElement" Background="{DynamicResource ControlsDisabledBrush}" CornerRadius="{Binding (metros:ControlsHelper.CornerRadius), Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" IsHitTestVisible="False" Opacity="0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+
+                            <metros:ContentControlEx x:Name="PART_ContentPresenter" ContentCharacterCasing="{Binding (metros:ControlsHelper.ContentCharacterCasing), RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="Background" Value="#26628C"/>
+                                <Setter Property="Visibility" Value="Collapsed" TargetName="DefaultBackground"/>
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" TargetName="DisabledVisualElement" Value="0.7"/>
+                                <Setter Property="Opacity" TargetName="PART_ContentPresenter" Value="0.3"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <DockPanel HorizontalAlignment="Center" >
+        <DockPanel DockPanel.Dock="Top" Visibility="{Binding WatchVisible}" Margin="0,12,0,0" >
+            <TextBlock Text="{DynamicResource ChooseHardDisk}" FontFamily="Microsoft YaHei" FontSize="24" Foreground="White"
+                       FontWeight="Light" HorizontalAlignment="Center"/>
+        </DockPanel>
+        <Button DockPanel.Dock="Bottom" x:Name="btnSure" Style="{StaticResource SureBtnTemplate}" 
+                Command="{Binding SureDoCommand}" Margin="0,35,0,16"
+                HorizontalAlignment="Center" Visibility="{Binding SelectCanExecute,Converter={StaticResource BoolToVisibilityConverter},ConverterParameter=1}" Cursor="Hand">
+            <Grid >
+                <TextBlock Text="{DynamicResource Confirm}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="16"/>
+            </Grid>
+        </Button>
+        <TreeView x:Name="_list" Background="Transparent"  Margin="0,30,30,0" Foreground="White"
+			ItemsSource="{Binding Source={StaticResource xdp}}" MaxHeight="448" >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectedItemChanged">
+                    <i:InvokeCommandAction Command="{Binding SelectedDeviceChangedCommand}" CommandParameter="{Binding ElementName=_list,Path=SelectedItem}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <TreeView.ItemTemplate >
+                <HierarchicalDataTemplate ItemsSource="{Binding XPath=Node}" >
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+    </DockPanel>
+</UserControl>

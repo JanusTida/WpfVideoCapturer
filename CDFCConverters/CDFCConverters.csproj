@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8E38964E-DBF2-4AB6-BD8A-7A20A39EBD97}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CDFCConverters</RootNamespace>
+    <AssemblyName>CDFCConverters</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CDFC.Util, Version=0.1.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CDFC.Common.0.1.1\lib\NET451\CDFC.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="CDFCCultures, Version=0.1.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CDFC.Common.0.1.1\lib\NET451\CDFCCultures.dll</HintPath>
+    </Reference>
+    <Reference Include="CDFCUIContracts, Version=0.1.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CDFC.Common.0.1.1\lib\NET451\CDFCUIContracts.dll</HintPath>
+    </Reference>
+    <Reference Include="EventLogger, Version=0.1.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CDFC.Common.0.1.1\lib\NET451\EventLogger.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Converters\AnalyzerActualHeightConverter.cs" />
+    <Compile Include="Converters\BoolToAngleConverteter.cs" />
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Converters\DeviceSelectorPage\BooleanToForegroundConverter.cs" />
+    <Compile Include="Converters\ByteSizeToSizeConverter.cs" />
+    <Compile Include="Converters\ByteToGBSectorConverter.cs" />
+    <Compile Include="Converters\ChannelNoToChdConverter.cs" />
+    <Compile Include="Converters\DateNumToDateStringConverter.cs" />
+    <Compile Include="Converters\DateTimeConverter.cs" />
+    <Compile Include="Converters\DecimalStaticMethod.cs" />
+    <Compile Include="Converters\DeviceSelectorPage\LevelToIconMarginConverter.cs" />
+    <Compile Include="Converters\DeviceSelectorPage\StringEqualToVisibilityConverter.cs" />
+    <Compile Include="Converters\DoubleToIntConverter.cs" />
+    <Compile Include="Converters\DriveFormatVisibilityConverter.cs" />
+    <Compile Include="Converters\DriveTypeDetailVisibilityConverter.cs" />
+    <Compile Include="Converters\DriveTypeToVisibilityConverter.cs" />
+    <Compile Include="Converters\FileLocationToUnitStringConverter.cs" />
+    <Compile Include="Converters\FragmentAnalyzerWindow\EndIniSectorToByteSizeConverter.cs" />
+    <Compile Include="Converters\FragmentAnalyzerWindow\FragmentStatusToColor.cs" />
+    <Compile Include="Converters\FragmentAnalyzerWindow\SectorSizeToByteSizeConverter.cs" />
+    <Compile Include="Converters\FragStatusToWord.cs" />
+    <Compile Include="Converters\HomePage\MouseOverToOpacityConverter.cs" />
+    <Compile Include="Converters\IsSelectedConverter.cs" />
+    <Compile Include="Converters\DeviceSelectorPage\LevelToIdentConverter.cs" />
+    <Compile Include="Converters\DeviceSelectorPage\NodeTypeToVisibilityConverter.cs" />
+    <Compile Include="Converters\PrimaryObjectScanSettingPage\MultiMediaTypeToCheckedConverter.cs" />
+    <Compile Include="Converters\PrimaryObjectScanSettingPage\MultiMediaTypeToDesConverter.cs" />
+    <Compile Include="Converters\PrimaryObjectScanSettingPage\MultiMediaTypeToWordConverter.cs" />
+    <Compile Include="Converters\PrimaryObjectScanSettingPage\ScanMethodToDescriptionConverter.cs" />
+    <Compile Include="Converters\PrimaryObjectScanSettingPage\ScanMethodToWordConverter.cs" />
+    <Compile Include="Converters\SaveStateToBoolConverter.cs" />
+    <Compile Include="Converters\PrimaryObjectScanSettingPage\ScanMethodToCheckedConverter.cs" />
+    <Compile Include="Converters\ScanningInfoDialogWindow\CurFileCountAndTotalCountConverter.cs" />
+    <Compile Include="Converters\ScanningInfoDialogWindow\ProgressBarValueToAngleConverter.cs" />
+    <Compile Include="Converters\ScanningInfoDialogWindow\ProgressBarValueToRotateAngleConverter.cs" />
+    <Compile Include="Converters\SpeedNumToSpeedStringConverter.cs" />
+    <Compile Include="Converters\StokensToWordsStringConverter.cs" />
+    <Compile Include="Converters\StringContainerToBoolConverter.cs" />
+    <Compile Include="Converters\TimeSpanToTimeString.cs" />
+    <Compile Include="Converters\UIntToSaveBitsNumConverter.cs" />
+    <Compile Include="Converters\UlongSubstractConverter.cs" />
+    <Compile Include="Converters\VideoItemListViewerPage\ChannelNoFormatConverter.cs" />
+    <Compile Include="Converters\VideoItemListViewerPage\VideoIntegrityToIconConverter.cs" />
+    <Compile Include="Converters\VideoItemListViewerPage\VideoIntegrityToWordConverter.cs" />
+    <Compile Include="Converters\WindowStateToVisibilityConverter.cs" />
+    <Compile Include="Enums\CellStatement.cs" />
+    <Compile Include="Enums\MultiMediaType.cs" />
+    <Compile Include="Enums\VisibilityAttributes.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CDFCSetting\CDFCSetting.csproj">
+      <Project>{215d3501-97dc-425b-9240-429aef05e748}</Project>
+      <Name>CDFCSetting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CDFCStatic\CDFCStatic.csproj">
+      <Project>{429211EC-6A00-422A-8270-6B209FDC1060}</Project>
+      <Name>CDFCStatic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CDFC_Entities\CDFCEntities.csproj">
+      <Project>{190633FE-AFA8-425C-8CD8-2C9281B33FDD}</Project>
+      <Name>CDFCEntities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

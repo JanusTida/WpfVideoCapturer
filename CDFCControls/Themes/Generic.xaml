@@ -1,0 +1,8 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:CDFCControls">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/CDFCControls;component/Themes/SplitView.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

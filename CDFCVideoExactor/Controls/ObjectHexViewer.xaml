@@ -1,0 +1,122 @@
+﻿<UserControl x:Class="CDFCVideoExactor.Controls.ObjectHexViewer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:behaviors="clr-namespace:CDFCBehaviors.Input;assembly=CDFCBehaviors"
+             xmlns:i ="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:CDFCVideoExactor.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="475" d:DesignWidth="430">
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <Style x:Key="TransParentTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="Transparent" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <DockPanel >
+                <DockPanel.Resources>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Margin" Value="10"/>
+                        <Setter Property="Width"  Value="40"/>
+                    </Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Margin" Value="10"/>
+                        <Setter Property="FontSize" Value="15"/>
+                        <Setter Property="Foreground" Value="White"/>
+                    </Style>
+                    <Style TargetType="{x:Type Image}">
+                        <Setter Property="Height" Value="18"/>
+                    </Style>
+                </DockPanel.Resources>
+                <Button x:Name="btnPreviousSector"  Command="{Binding GoPreviousPageCommand}"  Template="{StaticResource TransparentButtonTempate}">
+                    <Image Source="/CDFCVideoExactor;component/Images/FramesPreviewer/btnBackPage.png"/>
+                </Button>
+                <Button x:Name="btnNextSector" Template="{StaticResource TransparentButtonTempate}" Command="{Binding GoNextPageCommand}" >
+                    <Image Source="/CDFCVideoExactor;component/Images/FramesPreviewer/btnStepPage.png"/>
+                </Button>
+                <StackPanel Margin="10,0,0,0" HorizontalAlignment="Right" Orientation="Horizontal" >
+                    <TextBox Text="{Binding NowSector,UpdateSourceTrigger=PropertyChanged}" InputMethod.IsInputMethodEnabled="False"
+                             Margin="0,0,12,0"
+                            HorizontalAlignment="Left"  VerticalAlignment="Center" Width="100" >
+                        <i:Interaction.Behaviors>
+                            <behaviors:TextBoxInputRegExBehaviour MaxLength="16" RegularExpression="^\d+$" EmptyValue="0"/>
+                        </i:Interaction.Behaviors>
+                    </TextBox>
+                    <Button x:Name="btnEscape" Style="{StaticResource SureBtnStyle}" Foreground="White"  Content="{DynamicResource Select}" Command="{Binding GoCurPageCommand}" Width="87"/>
+                </StackPanel>
+            </DockPanel>
+        </Grid>
+        <ScrollViewer MaxWidth="640" HorizontalScrollBarVisibility="Auto" Template="{StaticResource ScrollViewerControlTemplate}"
+                      HorizontalAlignment="Left" CanContentScroll="False" Grid.Row="1"  Width="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type Grid}},Path=ActualWidth}">
+            <Grid MinWidth="600" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2.85*" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Border BorderThickness="1,1,0,1" BorderBrush="Black">
+                    <TextBox TextBlock.LineHeight="20" Style="{StaticResource TransParentTextBoxStyle}" 
+                         x:Name="stokenTxb"  LostFocus="stokenTxb_LostFocus" BorderThickness="0"
+                         SelectionChanged="stokenTxb_SelectionChanged"  Text="{Binding Path=StokenString,Mode=OneWay}" IsReadOnly="True" 
+                            TextWrapping="Wrap"  FontFamily="Lucida Console" 
+                            >
+                    </TextBox>
+                    <!-- ="{Binding Path=StokenString,Mode=OneWay}"-->
+                </Border>
+                <Border BorderBrush="Black" BorderThickness="1,1,1,1" Grid.Column="1">
+                    <TextBox TextBlock.LineHeight="20" IsReadOnly="True" TextWrapping="WrapWithOverflow" ScrollViewer.CanContentScroll="False"
+                             SelectionChanged="txbWords_SelectionChanged"  SelectionBrush="Blue" 
+                    x:Name="txbWords" LostFocus="txbWords_LostFocus" BorderThickness="00"   
+                                 Text="{Binding Path=WordsString,Mode=OneWay}" 
+                              FontFamily="Lucida Console" Style="{DynamicResource TransParentTextBoxStyle}"/>
+                    <!--Text="{Binding Path=WordsString,Mode=OneWay}" -->
+                </Border>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

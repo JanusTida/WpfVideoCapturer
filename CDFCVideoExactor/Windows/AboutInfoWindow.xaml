@@ -1,0 +1,44 @@
+﻿<metros:MetroWindow x:Class="CDFCVideoExactor.Windows.AboutInfoWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CDFCVideoExactor.Windows"
+        xmlns:aboutviews="clr-namespace:CDFCVideoExactor.Views.About"
+        xmlns:metros="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:commands="clr-namespace:CDFCUIContracts.Commands;assembly=CDFCUIContracts"
+        mc:Ignorable="d" Width="720" Height="300" WindowStartupLocation="CenterScreen"
+                    WindowTitleBrush="Black" BorderThickness="1,0,0,0" BorderBrush="Black"
+                    ResizeMode="NoResize"
+        Title="{DynamicResource Register}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <commands:EventToCommand PassEventArgsToCommand="True" Command="{Binding ClosingCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Window.Resources>
+        <ResourceDictionary Source="/CDFCVideoExactor;component/Resources/TabControl.xaml" />
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="16"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TabControl TabStripPlacement="Left" Style="{DynamicResource AboutTabControlStyle}" ItemContainerStyle="{DynamicResource AboutTabItemStyle}">
+            <TabItem  Header="{DynamicResource BasicInfo}"  >
+                <aboutviews:AboutInfo/>
+            </TabItem>
+            <TabItem Header="{DynamicResource SoftWareRegistration}">
+                <aboutviews:RegisteOption DataContext="{Binding RegisterOptionsViewModel}" />
+            </TabItem>
+            <TabItem Header="{DynamicResource FeedbackInformation}">
+                <aboutviews:FeedBackInfo DataContext="{Binding FeedBackViewModel}"/>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</metros:MetroWindow>

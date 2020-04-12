@@ -1,0 +1,26 @@
+﻿//Console.WriteLine("请输入镜像文件位置(可使用右击标题栏->编辑->粘贴):");
+            //var imgFile = ImgFile.GetImgFile(Console.ReadLine());
+            //var scanner = new Scanners.YinTanScanner(imgFile);
+
+            //Console.WriteLine("请输入终止扫描位置(单位为G):");
+            //long endSec = (long)( imgFile.Size / 1024 / 1024 / 1024);
+            //long.TryParse(Console.ReadLine(), out endSec);
+            //endSec *= 1024 * 1024 * 1024 / 512;
+            //var done = false;
+            //ThreadPool.QueueUserWorkItem(cb => {
+            //    scanner.Init(Enums.ScanMethod.EntireDisk, 0,(ulong)endSec,512,0,0);
+            //    scanner.SearchStart(0);
+            //    done = true;
+            //});
+            //while (!done) {
+            //    Console.WriteLine($"{scanner.CurrentSector * 512}/{imgFile.Size}");
+            //    Thread.Sleep(1000);
+            //}
+
+            //var fs = scanner.CurCategories;
+            //fs?.ForEach(p => {
+            //    p.Videos.ForEach(q => {
+            //        Console.WriteLine($"文件输出:{q.Size}-{q.StartDate}");
+            //    });
+            //});
+            //Console.ReadLine();

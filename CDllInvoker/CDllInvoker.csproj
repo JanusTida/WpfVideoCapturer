@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{83C53701-BC45-41BC-AC37-23AD5C71A12E}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CDllInvoker</RootNamespace>
+    <AssemblyName>CDllInvoker</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CDFC.Util, Version=0.1.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CDFC.Common.0.1.1.2\lib\NET451\CDFC.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="CDFCCultures, Version=0.1.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CDFC.Common.0.1.1.2\lib\NET451\CDFCCultures.dll</HintPath>
+    </Reference>
+    <Reference Include="CDFCUIContracts, Version=0.1.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CDFC.Common.0.1.1.2\lib\NET451\CDFCUIContracts.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EventLogger, Version=0.1.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CDFC.Common.0.1.1.2\lib\NET451\EventLogger.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.AdvApi32, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.AdvApi32.0.5.126\lib\net45\PInvoke.AdvApi32.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.BCrypt, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.BCrypt.0.5.126\lib\net45\PInvoke.BCrypt.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.Crypt32, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.Crypt32.0.5.126\lib\net45\PInvoke.Crypt32.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.DbgHelp, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.DbgHelp.0.5.126\lib\net45\PInvoke.DbgHelp.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.DwmApi, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.DwmApi.0.5.126\lib\net45\PInvoke.DwmApi.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.Gdi32, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.Gdi32.0.5.126\lib\net45\PInvoke.Gdi32.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.Hid, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.Hid.0.5.126\lib\net45\PInvoke.Hid.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.ImageHlp, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.ImageHlp.0.5.126\lib\net45\PInvoke.ImageHlp.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.Kernel32, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.Kernel32.0.5.126\lib\net45\PInvoke.Kernel32.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.Magnification, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.Magnification.0.5.126\lib\net45\PInvoke.Magnification.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.Msi, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.Msi.0.5.126\lib\net45\PInvoke.Msi.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.NCrypt, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.NCrypt.0.5.126\lib\net45\PInvoke.NCrypt.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.NetApi32, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.NetApi32.0.5.126\lib\net45\PInvoke.NetApi32.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.NTDll, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.NTDll.0.5.126\lib\net45\PInvoke.NTDll.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.Ole32, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.Ole32.0.5.126\lib\net45\PInvoke.Ole32.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.Psapi, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.Psapi.0.5.126\lib\net45\PInvoke.Psapi.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.SetupApi, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.SetupApi.0.5.126\lib\net45\PInvoke.SetupApi.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.SHCore, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.SHCore.0.5.126\lib\net45\PInvoke.SHCore.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.Shell32, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.Shell32.0.5.126\lib\net45\PInvoke.Shell32.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.User32, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.User32.0.5.126\lib\net45\PInvoke.User32.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.Userenv, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.Userenv.0.5.126\lib\net45\PInvoke.Userenv.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.UxTheme, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.UxTheme.0.5.126\lib\net45\PInvoke.UxTheme.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.Windows.Core, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.Windows.Core.0.5.126\lib\net35\PInvoke.Windows.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.Windows.ShellScalingApi, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.Windows.ShellScalingApi.0.5.126\lib\net45\PInvoke.Windows.ShellScalingApi.dll</HintPath>
+    </Reference>
+    <Reference Include="PInvoke.WtsApi32, Version=0.5.0.0, Culture=neutral, PublicKeyToken=9e300f9f87f04a7a, processorArchitecture=MSIL">
+      <HintPath>..\packages\PInvoke.WtsApi32.0.5.126\lib\net45\PInvoke.WtsApi32.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="SharpLibWin32, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpLibWin32.0.1.5\lib\net20\SharpLibWin32.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.102.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.102.0\lib\net451\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.102.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.102.0\lib\net451\System.Data.SQLite.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.102.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.102.0\lib\net451\System.Data.SQLite.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Validation, Version=2.4.0.0, Culture=neutral, PublicKeyToken=2fc06f0d701809a7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Validation.2.4.15\lib\net45\Validation.dll</HintPath>
+    </Reference>
+    <Reference Include="Win32, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Win32.1.1.6\lib\net40\Win32.dll</HintPath>
+    </Reference>
+    <Reference Include="zmland.Win32, Version=1.4.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\zmland.Win32.1.4.0.3\lib\net35\zmland.Win32.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="app.manifest" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="DevInit\dev list.txt" />
+    <None Include="DevInit\DHRecovery.h" />
+    <None Include="DevInit\Initialize.h" />
+    <None Include="disk32.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CDFCLogger\CDFCLogger.csproj">
+      <Project>{40bb3485-dc9b-4c43-9b17-f11f14ac6980}</Project>
+      <Name>CDFCLogger</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CDFCMessageBoxes\CDFCMessageBoxes.csproj">
+      <Project>{bce3d65e-c911-46bc-91f2-069903b8b1ac}</Project>
+      <Name>CDFCMessageBoxes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CDFCStatic\CDFCStatic.csproj">
+      <Project>{429211ec-6a00-422a-8270-6b209fdc1060}</Project>
+      <Name>CDFCStatic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CDFCValueRanges\CDFCValueRanges.csproj">
+      <Project>{0991a37f-c8e4-469b-8c21-878f6cc6aec2}</Project>
+      <Name>CDFCValueRanges</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CDFC_Entities\CDFCEntities.csproj">
+      <Project>{190633fe-afa8-425c-8cd8-2c9281b33fdd}</Project>
+      <Name>CDFCEntities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="cdfcproject2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="matrix.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestYinTan.txt" />
+    <Content Include="VideoRecover.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.102.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.102.0\build\net451\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.102.0\build\net451\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.102.0\build\net451\System.Data.SQLite.Core.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,317 @@
+﻿<UserControl x:Class="CDFCVideoExactor.Controls.CPAndMPrimarySettingPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CDFCVideoExactor.Controls"
+              xmlns:publicCvts="clr-namespace:CDFCConverters.Converters;assembly=CDFCConverters"
+            xmlns:behaviors="clr-namespace:CDFCBehaviors.Input;assembly=CDFCBehaviors"
+            xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+            xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+              xmlns:cvts="clr-namespace:CDFCConverters.Converters.PrimaryObjectScanSettingPage;assembly=CDFCConverters"
+            xmlns:metros="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1440">
+    <UserControl.InputBindings>
+        <KeyBinding Key="Enter" Command="{Binding SureDoCommand}"/>
+    </UserControl.InputBindings>
+    <UserControl.Resources>
+        <!--下拉按钮-->
+        <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource GrayBrush10}"/>
+            <Setter Property="metros:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
+            <Setter Property="metros:ControlsHelper.CornerRadius" Value="3"/>
+            <Setter Property="FontFamily" Value="{DynamicResource DefaultFont}"/>
+            <Setter Property="FontSize" Value="{DynamicResource UpperCaseContentFontSize}"/>
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="Padding" Value="5,6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border x:Name="Background" Background="{TemplateBinding Background}" CornerRadius="{Binding (metros:ControlsHelper.CornerRadius), Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{x:Null}" CornerRadius="{Binding (metros:ControlsHelper.CornerRadius), Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            <Border x:Name="DisabledVisualElement" Background="{DynamicResource ControlsDisabledBrush}" CornerRadius="{Binding (metros:ControlsHelper.CornerRadius), Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" IsHitTestVisible="False" Opacity="0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            <metros:ContentControlEx x:Name="PART_ContentPresenter" ContentCharacterCasing="{Binding (metros:ControlsHelper.ContentCharacterCasing), RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="Background" Value="{DynamicResource GrayBrush8}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="Background" Value="{DynamicResource GrayBrush7}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                <Setter Property="BorderBrush" TargetName="Border" Value="{DynamicResource ButtonMouseOverBorderBrush}"/>
+                                <Setter Property="BorderThickness" TargetName="Border" Value="2"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" TargetName="DisabledVisualElement" Value="0.7"/>
+                                <Setter Property="Opacity" TargetName="PART_ContentPresenter" Value="0.3"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="RadioButtonStyle" TargetType="{x:Type RadioButton}">
+            <Setter Property="Foreground" Value="{DynamicResource LabelTextBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource WhiteBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource CheckBoxBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="metros:ControlsHelper.FocusBorderBrush" Value="{DynamicResource HighlightBrush}"/>
+            <Setter Property="metros:ControlsHelper.MouseOverBorderBrush" Value="{DynamicResource CheckBoxMouseOverBrush}"/>
+            <Setter Property="FontFamily" Value="{DynamicResource ContentFontFamily}"/>
+            <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="6,0,0,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type RadioButton}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="RightCol" Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="0.55" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="contentPresenter"/>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="disabled"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="Checked1"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked"/>
+                                    <VisualState x:Name="Indeterminate"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid x:Name="PART_CHECKBOX">
+                                <Ellipse x:Name="Checked1" Fill="{DynamicResource HighlightBrush}" Height="0" Opacity="0" Width="0"/>
+                                <Border x:Name="disabled"/>
+                            </Grid>
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+
+                            </Trigger>
+
+                            <Trigger Property="metros:ToggleButtonHelper.ContentDirection" Value="RightToLeft">
+                                <Setter Property="Padding" Value="0,0,6,0"/>
+
+                                <Setter Property="Grid.Column" TargetName="PART_CHECKBOX" Value="1"/>
+
+                                <Setter Property="Grid.Column" TargetName="contentPresenter" Value="0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="VideoItemListStorageSizeTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="#E2E2E2"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="MaxLength" Value="4"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" CornerRadius="6" Padding="2,0,0,0"  BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <DockPanel >
+                                <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                                <TextBlock Text="GB" HorizontalAlignment="Right" DockPanel.Dock="Right" Margin="0,0,4,0" VerticalAlignment="Center"/>
+                            </DockPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+        <!--所需转换器-->
+        <cvts:ScanMethodToCheckedConverter x:Key="ScanMethodToCheckedConverter"/>
+        <cvts:ScanMethodToWordConverter x:Key="ScanMethodToWordConverter"/>
+        <cvts:ScanMethodToDescriptionConverter x:Key="ScanMethodToDescriptionConverter"/>
+    </UserControl.Resources>
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="21"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.Resources>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="FontWeight" Value="Light"/>
+                <Setter Property="Foreground" Value="White"/>
+            </Style>
+        </Grid.Resources>
+        <DockPanel Grid.Row="1" Visibility="{Binding WatchVisible}" >
+            <StackPanel HorizontalAlignment="Center" Margin="0,15,0,0" Orientation="Horizontal">
+                <TextBlock Text="请选择扫描方式" FontFamily="Microsoft YaHei" FontSize="20" DockPanel.Dock="Top"/>
+            </StackPanel>
+        </DockPanel>
+        <StackPanel Grid.Row="2">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,43,0,0">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+                        <Setter Property="FontWeight" Value="Light"/>
+                        <Setter Property="Foreground" Value="White"/>
+                    </Style>
+                </StackPanel.Resources>
+                <TextBlock Text="设备" Margin="0,0,17,0"  />
+                <ComboBox Width="200" ItemsSource="{Binding ObjectScanSetting.DeviceTypes,Mode=OneWay}"
+                      SelectedItem="{Binding ObjectScanSetting.SelectedDeviceType}"
+                      DisplayMemberPath="Info" Style="{StaticResource CdfcComboBoxStyle}" >
+
+                </ComboBox>
+                <TextBlock Text="设备类型" Margin="264,0,17,0" />
+                <ComboBox Width="200" ItemsSource="{Binding ObjectScanSetting.VersionTypes,Mode=OneWay}"
+                      SelectedItem="{Binding ObjectScanSetting.SelectedVersionType}"
+                      DisplayMemberPath="Info" Style="{StaticResource CdfcComboBoxStyle}"/>
+            </StackPanel>
+            <StackPanel>
+                <TextBlock Text="{Binding ObjectScanSetting.WarnWord}" Height="30" TextAlignment="Center" FontSize="18" Margin="0,20,0,0" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"  Margin="0,86,0,0">
+                <StackPanel.Resources>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="FontSize" Value="20"/>
+                        <Setter Property="Foreground" Value="White"/>
+                        <Setter Property="Margin" Value="0,20,0,0"/>
+                        <Setter Property="TextAlignment" Value="Center"/>
+                    </Style>
+                    <Style TargetType="{x:Type Image}" x:Key="RadioBtnImg">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type RadioButton}}
+                                ,Path=IsEnabled}" Value="False">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="{x:Type Image}" x:Key="RadioBtnCheckedImg" BasedOn="{StaticResource RadioBtnImg}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type RadioButton}},Path=IsChecked}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                    <Style TargetType="{x:Type Image}" x:Key="RadioBtnUnCheckedImg" BasedOn="{StaticResource RadioBtnImg}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type RadioButton}},Path=IsChecked}" Value="True">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Resources>
+                <RadioButton IsChecked="{Binding Path=ObjectScanSetting.ScanMethod,Converter={StaticResource ScanMethodToCheckedConverter},ConverterParameter=EntireDisk}"
+                         IsEnabled="{Binding ObjectScanSetting.IsEntireScanEnabled}" Style="{StaticResource RadioButtonStyle}"
+                         Margin="0,0,163,0" >
+                    <StackPanel>
+                        <Image x:Name="RbtImgFileSystem" Source="/CDFCVideoExactor;component/Images/PrimaryObjectScanSettingPage/scanMethodEntireDisk.png"
+                               Style="{StaticResource RadioBtnUnCheckedImg}">
+                        </Image>
+
+                        <Image Style="{StaticResource RadioBtnCheckedImg}"
+                            Source="/CDFCVideoExactor;component/Images/PrimaryObjectScanSettingPage/scanMethodEntireDiskActive.png" />
+                        <TextBlock Text="全盘扫描" />
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton IsChecked="{Binding Path=ObjectScanSetting.ScanMethod,Converter={StaticResource ScanMethodToCheckedConverter},ConverterParameter=FileSystem}"
+                         IsEnabled="{Binding ObjectScanSetting.IsFSScanEnabled}" Margin="0,0,163,0" Style="{DynamicResource RadioButtonStyle}">
+                    <StackPanel>
+                        <Image Source="/CDFCVideoExactor;component/Images/PrimaryObjectScanSettingPage/scanMethodFileSystem.png"
+                               Style="{StaticResource RadioBtnUnCheckedImg}" />
+                        <Image Source="/CDFCVideoExactor;component/Images/PrimaryObjectScanSettingPage/scanMethodFileSystemActive.png"
+                           Style="{StaticResource RadioBtnCheckedImg}" />
+                        <TextBlock Text="文件系统扫描"/>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton x:Name="RadioBtnArea" IsChecked="{Binding Path=ObjectScanSetting.ScanMethod,Converter={StaticResource ScanMethodToCheckedConverter},ConverterParameter=Area}"
+                IsEnabled="{Binding ObjectScanSetting.IsAreaScanEnabled}" Margin="0,0,130,0" Style="{DynamicResource RadioButtonStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel>
+                            <Image Source="/CDFCVideoExactor;component/Images/PrimaryObjectScanSettingPage/scanMethodArea.png"
+                           Style="{StaticResource RadioBtnUnCheckedImg}" />
+                            <Image Source="/CDFCVideoExactor;component/Images/PrimaryObjectScanSettingPage/scanMethodAreaActive.png"
+                           Style="{StaticResource RadioBtnCheckedImg}" />
+                            <TextBlock Text="区域查找"/>
+                        </StackPanel>
+                        <TextBox input:InputMethod.IsInputMethodEnabled="False" GotFocus="numericTextBox_GetFocus" VerticalAlignment="Bottom" Text="{Binding Path=ObjectScanSetting.RegionSize,UpdateSourceTrigger=PropertyChanged}"
+                                 Visibility="{Binding IsChecked,ElementName=RadioBtnArea,Converter={x:Static publicCvts:BoolToVisibilityConverter.StaticInstance},ConverterParameter=1}"
+                                 Margin="10,0,0,40" Width="40" Style="{StaticResource VideoItemListStorageSizeTextBoxStyle}">
+                            <i:Interaction.Behaviors>
+                                <behaviors:TextBoxInputRegExBehaviour RegularExpression="^\d+$" MaxLength="2" EmptyValue="0"/>
+                            </i:Interaction.Behaviors>
+                        </TextBox>
+                    </StackPanel>
+                </RadioButton>
+                <RadioButton IsChecked="{Binding Path=ObjectScanSetting.ScanMethod,Converter={StaticResource ScanMethodToCheckedConverter},ConverterParameter=Left}"
+                IsEnabled="{Binding ObjectScanSetting.IsLeftScanEnabled}" Style="{DynamicResource RadioButtonStyle}">
+                    <StackPanel>
+                        <Image Style="{StaticResource RadioBtnUnCheckedImg}"
+                            Source="/CDFCVideoExactor;component/Images/PrimaryObjectScanSettingPage/scanMethodLeft.png"/>
+                        <Image Style="{StaticResource RadioBtnCheckedImg}"
+                            Source="/CDFCVideoExactor;component/Images/PrimaryObjectScanSettingPage/scanMethodLeftActive.png"/>
+                        <TextBlock Text="剩余空间查找"/>
+                    </StackPanel>
+                </RadioButton>
+            </StackPanel>
+            <Button HorizontalAlignment="Center" Cursor="Hand"
+                    Command="{Binding SureDoCommand}"
+                    IsEnabled="{Binding ObjectScanSetting.ScanEnabled}"
+                Margin="0,72,0,0" Style="{DynamicResource SureBtnStyle}">
+                <TextBlock Text="确定" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="16" FontFamily="Microsoft YaHei"/>
+            </Button>
+        </StackPanel>
+        <DockPanel Grid.Row="3">
+            <Border Padding="36,0,0,0" VerticalAlignment="Bottom" MinHeight="100" BorderThickness="0,1,0,0">
+                <Border.BorderBrush>
+                    <SolidColorBrush Opacity="0.1" Color="White"/>
+                </Border.BorderBrush>
+                <StackPanel Width="600" HorizontalAlignment="Left">
+                    <TextBlock  Text="{Binding ObjectScanSetting.ScanMethod,
+                        Converter={StaticResource ScanMethodToWordConverter}}" FontSize="18" />
+                    <TextBlock TextWrapping="WrapWithOverflow" Margin="0,20,0,0" Text="{Binding ObjectScanSetting.ScanMethod,
+                        Converter={StaticResource ScanMethodToDescriptionConverter}}" FontSize="16"/>
+                </StackPanel>
+            </Border>
+        </DockPanel>
+    </Grid>
+</UserControl>

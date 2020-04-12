@@ -1,0 +1,60 @@
+﻿<UserControl x:Class="CDFCVideoExactor.Views.About.FeedBackInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:metros="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:local="clr-namespace:CDFCVideoExactor.Views.About"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition />
+            <RowDefinition Height="54"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <TextBlock VerticalAlignment="Center" ><Run Text="{DynamicResource ContactInfo}"/><Run Text="{DynamicResource Comma}"/></TextBlock>
+        <TextBox Grid.Column="1" VerticalAlignment="Center" Text="{Binding ContactString,UpdateSourceTrigger=PropertyChanged}" />
+        <TextBlock Grid.Row="1" Margin="0,0,12,0"  ><Run Text="{DynamicResource FeedBackContent}"/><Run Text="{DynamicResource Comma}"/></TextBlock>
+        <TextBox Text="{Binding FeedBackWord,UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" AcceptsReturn="True" VerticalScrollBarVisibility="Visible" MaxLength="360"/>
+        <Grid Grid.Row="2" Grid.Column="1">
+            <metros:ProgressRing Grid.ColumnSpan="2" Width="40" Height="40">
+                <metros:ProgressRing.Style>
+                    <Style TargetType="metros:ProgressRing">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsSubmiting,FallbackValue=False}" Value="False">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </metros:ProgressRing.Style>
+            </metros:ProgressRing>
+            <TextBlock Text="{Binding ReportWord}" TextAlignment="Center" />
+            <Button Margin="0,6" Command="{Binding SubmitCommand}" Content="{DynamicResource SubForFeedBack}" >
+                <Button.Style>
+                    <Style TargetType="Button" BasedOn="{StaticResource BorderLessButton}">
+                        <Setter Property="Background" Value="#d5d5d5"/>
+                        <Setter Property="Padding" Value="5,2"/>
+                        <Setter Property="FontSize" Value="16"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CanSubmit,FallbackValue=True}" Value="False">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Button.Style>
+            </Button>
+        </Grid>
+        <TextBlock DockPanel.Dock="Bottom" Grid.Row="3" Grid.ColumnSpan="2">
+                <Run>Copyright@2017</Run>
+                <Run Foreground="#1bd67b" Text="{DynamicResource CompanyName}" />
+                <Run>All Rights Reserved</Run>
+        </TextBlock>
+    </Grid>
+</UserControl>

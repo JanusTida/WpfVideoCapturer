@@ -1,0 +1,9 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:CDFCVideoExactor.Properties">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/CDFCVideoExactor;component/Resources/MainWindowPageResource.xaml"/>
+        <ResourceDictionary Source="/CDFCVideoExactor;component/Resources/PageResource.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+</ResourceDictionary>

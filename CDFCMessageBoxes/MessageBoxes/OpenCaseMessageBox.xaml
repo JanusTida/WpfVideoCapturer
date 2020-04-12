@@ -1,0 +1,70 @@
+﻿<metros:MetroWindow x:Class="CDFCMessageBoxes.MessageBoxes.OpenCaseMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:metros="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" Closing="MetroWindow_Closing"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" IsEnabledChanged="MetroWindow_IsEnabledChanged"
+        xmlns:local="clr-namespace:CDFCMessageBoxes.MessageBoxes" IsEnabled="{Binding IsEnabled}"
+        mc:Ignorable="d" ResizeMode="NoResize"  WindowTitleBrush="#cfcfcf"  
+                    WindowStartupLocation="CenterScreen" TitleForeground="White"  Height="400" MaxHeight="400"
+        Title="{DynamicResource SelectARecord}"   Width="300">
+    <metros:MetroWindow.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/CDFCMessageBoxes;component/Resources/MessageBoxResourceDictionary.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <Style x:Key="OpenCaseListViewStyle" TargetType="{x:Type ListView}">
+                <Setter Property="OverridesDefaultStyle" Value="True"/>
+                <Setter Property="AlternationCount" Value="2"/>
+                <Setter Property="Background" Value="{DynamicResource WhiteBrush}"/>
+                <Setter Property="BorderBrush" Value="{DynamicResource BlackBrush}"/>
+                <Setter Property="BorderThickness" Value="0,1,0,0"/>
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+                <Setter Property="SnapsToDevicePixels" Value="True"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ListView}">
+                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                                <ScrollViewer Padding="{TemplateBinding Padding}" Style="{DynamicResource MetroGridViewScrollViewerStyle}">
+                                    <ItemsPresenter/>
+                                </ScrollViewer>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsGrouping" Value="True">
+                                    <Setter Property="ScrollViewer.CanContentScroll" Value="False"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter Property="BorderBrush" TargetName="Border" Value="{DynamicResource GrayBrush9}"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="{x:Type Button}" BasedOn="{StaticResource SureBtnStyle}">
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Margin" Value="6,0,6,0"/>
+            </Style>
+        </ResourceDictionary>
+    </metros:MetroWindow.Resources>
+    <Grid>
+        <Image Source="/CDFCMessageBoxes;component/RadialBackground.png" Stretch="Fill"/>
+        <DockPanel>
+            <ListView DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" Height="300"
+                      SelectedItem="{Binding SelectedItem}" ItemsSource="{Binding Items}" Background="Transparent" Style="{StaticResource OpenCaseListViewStyle}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding TitleWord}" Foreground="White"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button  Command="{Binding ConfirmCommand}" Grid.Row="1">
+                <TextBlock Text="{DynamicResource Confirm}"/>
+            </Button>
+        </DockPanel>
+    </Grid>
+</metros:MetroWindow>

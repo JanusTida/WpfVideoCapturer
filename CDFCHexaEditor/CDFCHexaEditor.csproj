@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CF6AC02D-02FA-4EE9-A507-BD94F489972E}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WPFHexaEditor.Control</RootNamespace>
+    <AssemblyName>CDFCHexaEditor</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CDFC.Util, Version=0.1.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CDFC.Common.0.1.1\lib\NET451\CDFC.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="CDFCCultures, Version=0.1.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CDFC.Common.0.1.1\lib\NET451\CDFCCultures.dll</HintPath>
+    </Reference>
+    <Reference Include="CDFCUIContracts, Version=0.1.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CDFC.Common.0.1.1\lib\NET451\CDFCUIContracts.dll</HintPath>
+    </Reference>
+    <Reference Include="EventLogger, Version=0.1.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CDFC.Common.0.1.1\lib\NET451\EventLogger.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro">
+      <HintPath>..\packages\MahApps.Metro.1.4.1\lib\net45\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HexByteControl.xaml.cs">
+      <DependentUpon>HexByteControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="IO\HandleStream.cs" />
+    <Compile Include="MessageBoxes\ObjectDeviceHexViewer.cs" />
+    <Compile Include="StringByteControl.cs" />
+    <Compile Include="Windows\ObjectDeviceHexWindow.xaml.cs">
+      <DependentUpon>ObjectDeviceHexWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="HexByteControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ObjectDeviceHexWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="Languages\zh_CN\CDFCHexaEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Resource>
+    <Page Include="ResourceDictionary\FontDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ResourceDictionary\ToolTipDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="HexaEditor.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="Abstracts\HexEditorViewModel.cs" />
+    <Compile Include="Core\BookMark.cs" />
+    <Compile Include="Core\MethodExtention\ApplicationExtention.cs" />
+    <Compile Include="Core\MethodExtention\ByteArrayExtention.cs" />
+    <Compile Include="Core\Bytes\ByteModified.cs" />
+    <Compile Include="Core\Bytes\ByteProvider.cs" />
+    <Compile Include="Core\Bytes\ByteConverters.cs" />
+    <Compile Include="Core\ConstantReadOnly.cs" />
+    <Compile Include="Core\Enumeration.cs" />
+    <Compile Include="Core\KeyValidator.cs" />
+    <Compile Include="Core\MethodExtention\TrackExtention.cs" />
+    <Compile Include="Core\ROMTable\Enum.cs" />
+    <Compile Include="Core\ROMTable\DTE.cs" />
+    <Compile Include="Core\ROMTable\BookMark.cs" />
+    <Compile Include="Core\ROMTable\TBLStream.cs" />
+    <Compile Include="HexaEditor.xaml.cs">
+      <DependentUpon>HexaEditor.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="ResourceDictionary\BrushesDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CDFC_Entities\CDFCEntities.csproj">
+      <Project>{190633fe-afa8-425c-8cd8-2c9281b33fdd}</Project>
+      <Name>CDFCEntities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

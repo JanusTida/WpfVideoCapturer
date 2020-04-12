@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<DeviceTypes>
+  <DeviceType>
+    <ID>1</ID>
+    <Name>大华</Name>
+  </DeviceType>
+  <DeviceType>
+    <ID>2</ID>
+    <Name>海康</Name>
+  </DeviceType>
+  <DeviceType>
+    <ID>3</ID>
+    <Name>中维</Name>
+  </DeviceType>
+  <DeviceType>
+    <ID>128</ID>
+    <Name>监控/多媒体综合</Name>
+  </DeviceType>
+</DeviceTypes>

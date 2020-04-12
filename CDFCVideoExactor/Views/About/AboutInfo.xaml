@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="CDFCVideoExactor.Views.About.AboutInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CDFCVideoExactor.Views.About"
+             xmlns:metros="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Border >
+        <DockPanel>
+            <Image DockPanel.Dock="Top" Source="{Binding IconSource,FallbackValue='../../Images/Icons/BlackHole_dahua.ico'}" 
+                   Width="60" Height="60" HorizontalAlignment="Left" Margin="20,10,0,10" />
+            <TextBlock Text="{Binding FeatureName,FallbackValue=星云大华监控录像视频恢复}" FontWeight="Bold" FontSize="16"  DockPanel.Dock="Top"></TextBlock>
+            <StackPanel DockPanel.Dock="Top" Margin="0,12,0,0" TextElement.FontSize="14">
+                <TextBlock><Run Text="{DynamicResource Address}"></Run><Run Text="{DynamicResource Comma}"/><Run Text="{DynamicResource AddressValue}"></Run></TextBlock>
+                <TextBlock><Run Text="{DynamicResource Email}"></Run><Run Text="{DynamicResource Comma}"/>support@cflab.com</TextBlock>
+                <TextBlock><Run Text="{DynamicResource Phone}"></Run><Run Text="{DynamicResource Comma}"/>400-6090906</TextBlock>
+                <TextBlock ><Run Text="{DynamicResource OfficialSite}"/><Run Text="{DynamicResource Comma}"/><Hyperlink x:Name="OriSite_HyperLink" Click="OriSite_HyperLink_Click" >www.cflab.net</Hyperlink></TextBlock>
+            </StackPanel>
+            <Grid DockPanel.Dock="Top" Margin="0,6,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCheckingNewVersion}" Value="True">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <Button  HorizontalAlignment="Left" Command="{Binding CheckForNewVersionCommand}" Content="{DynamicResource CheckForUpdate}" >
+                    </Button>
+                    <TextBlock Margin="12,0" VerticalAlignment="Center" Text="{Binding UpdateReport,FallbackValue=当前版本已是最新}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding IsCheckingNewVersion,FallbackValue=False}" Value="False">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <metros:ProgressRing HorizontalAlignment="Left" Width="20" Height="20" />
+                    <TextBlock Text="{DynamicResource CheckForUpdate}"/>
+                </StackPanel>
+            </Grid>
+            <TextBlock DockPanel.Dock="Bottom">
+                <Run>Copyright@2017</Run>
+                <Run Foreground="#1bd67b" Text="{DynamicResource CompanyName}" />
+                <Run>All Rights Reserved</Run>
+            </TextBlock>
+            <Border/>
+        </DockPanel>
+    </Border>
+</UserControl>

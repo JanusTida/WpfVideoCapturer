@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="CDFCDavPlayer.Views.DavPlayerPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CDFCDavPlayer.Views"
+             xmlns:wfi ="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+        xmlns:wfm ="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid >
+        <wfi:WindowsFormsHost x:Name="playerHost" Background="Black" >
+            <wfm:PictureBox x:Name="pbLayer"  Resize="pbLayer_Resize" Click="pbLayer_Click" DoubleClick="pbLayer_DoubleClick" />
+        </wfi:WindowsFormsHost>
+        
+    </Grid>
+    
+</UserControl>

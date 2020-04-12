@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--预览界面-->
+    <sys:String x:Key="EvaluatedVersion" >试用版</sys:String>
+    <sys:String x:Key="Play">播放</sys:String>
+    <sys:String x:Key="Pause">暂停</sys:String>
+    <sys:String x:Key="ErrorWhenInitializingPreviewer">预览组件初始化错误!</sys:String>
+    <sys:String x:Key="FailedToInitializePreviewer">初始化预览组件错误!</sys:String>
+</ResourceDictionary>

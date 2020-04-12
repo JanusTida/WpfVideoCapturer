@@ -1,0 +1,208 @@
+﻿<UserControl x:Class="CDFCVideoExactor.Controls.HomePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CDFCVideoExactor.Controls"
+             xmlns:metros="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:publicCvts="clr-namespace:CDFCConverters.Converters;assembly=CDFCConverters"
+             xmlns:cvtEnums="clr-namespace:CDFCConverter.Enums;assembly=CDFCConverters"
+             xmlns:viewmodels="clr-namespace:CDFCVideoExactor.ViewModels"
+             xmlns:enums="clr-namespace:CDFCVideoExactor.Enums"
+             xmlns:cvts="clr-namespace:CDFCConverters.Converters.HomePage;assembly=CDFCConverters"
+             xmlns:helpers="clr-namespace:CDFCVideoExactor.Helpers"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1440">
+    <UserControl.Resources>
+        <Style x:Key="EntranceBtnTemplate" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="metros:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
+            <Setter Property="metros:ControlsHelper.CornerRadius" Value="3"/>
+            <Setter Property="FontFamily" Value="Microsoft YaHei" />
+            <Setter Property="FontSize" Value="{DynamicResource UpperCaseContentFontSize}"/>
+            <Setter Property="FontWeight" Value="Light"/>
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="Padding" Value="5,6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border x:Name="Background" Background="{TemplateBinding Background}" CornerRadius="{Binding (metros:ControlsHelper.CornerRadius), Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Border x:Name="Border"  Background="{x:Null}" CornerRadius="{Binding (metros:ControlsHelper.CornerRadius), Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            <Border x:Name="DisabledVisualElement" Background="{DynamicResource ControlsDisabledBrush}" CornerRadius="{Binding (metros:ControlsHelper.CornerRadius), Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" IsHitTestVisible="False" Opacity="0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            <metros:ContentControlEx x:Name="PART_ContentPresenter" ContentCharacterCasing="{Binding (metros:ControlsHelper.ContentCharacterCasing), RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <!--<Setter Property="Background" TargetName="Background" Value="{DynamicResource GrayBrush8}"/> -->
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <!--<Setter Property="Background" TargetName="Background" Value="{DynamicResource GrayBrush7}"/>-->
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                <!-- <Setter Property="BorderBrush" TargetName="Border" Value="{DynamicResource ButtonMouseOverBorderBrush}"/>-->
+                                <!--<Setter Property="BorderThickness" TargetName="Border" Value="2"/> -->
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" TargetName="DisabledVisualElement" Value="0.7"/>
+                                <Setter Property="Opacity" TargetName="PART_ContentPresenter" Value="0.3"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!--转换器-->
+        <publicCvts:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
+        <cvts:MouseOverToOpacityConverter x:Key="MouseOverToOpacityConverter"/>
+    </UserControl.Resources>
+
+    <Grid Margin="0,8,0,-8" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="1.6*"/>
+            <!--<RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>-->
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style TargetType="{x:Type Image}">
+                <Setter Property="Stretch" Value="None"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Style>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+            </Style>
+            <Style TargetType="StackPanel" x:Key="DesStack">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="Margin" Value="12,0"/>
+                <Setter Property="TextElement.Foreground" Value="White"/>
+            </Style>
+            <Style TargetType="Image" x:Key="HoverImg" BasedOn="{StaticResource {x:Type Image}}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button},Path=IsMouseOver}"
+                                         Value="False">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="Image" x:Key="NormalImg" BasedOn="{StaticResource {x:Type Image}}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType=Button},Path=IsMouseOver}"
+                                         Value="True">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="TextBlock" x:Key="MOverHlTxb">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}},Path=IsMouseOver,FallbackValue=False}" Value="True">
+                        <Setter Property="Foreground" Value="#1b92ec"/>
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type Button}},Path=IsMouseOver,FallbackValue=False}" Value="False">
+                        <Setter Property="Foreground" Value="White"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+            <Style TargetType="{x:Type TextBlock}" x:Key="DetailTextBlockstyle" BasedOn="{StaticResource MOverHlTxb}">
+                <Setter Property="Margin" Value="32,14,0,0"/>
+                <Setter Property="FontSize" Value="18"/>
+                <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+                <Setter Property="FontFamily" Value="Microsoft YaHei UI"/>
+            </Style>
+            <Style x:Key="EntranceTitleTextBlockStyle" TargetType="{x:Type TextBlock}"  BasedOn="{StaticResource MOverHlTxb}">
+                <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="TextAlignment" Value="Left"/>
+            </Style>
+            <Style x:Key="UnderlyTextBlockStyle" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource MOverHlTxb}">
+                <Setter Property="FontFamily" Value="Arial"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="Foreground" Value="White"/>
+                <!--<Setter Property="TextDecorations">
+                <Setter.Value>
+                    <TextDecorationCollection>
+                        <TextDecoration PenOffset="5" PenOffsetUnit="Pixel" PenThicknessUnit="Pixel"/>
+                    </TextDecorationCollection>
+                </Setter.Value>
+            </Setter>-->
+                <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+            </Style>
+        </Grid.Resources>
+        <!--<DockPanel Grid.Row="1" Margin="0,0,0,56" Grid.ColumnSpan="3" Visibility="{Binding WatchVisible}" >
+            <StackPanel HorizontalAlignment="Center" Margin="0,15,0,0" Orientation="Horizontal">
+                <TextBlock Text="{DynamicResource ChooseDeviceType}" FontSize="24" DockPanel.Dock="Top" FontWeight="Light"/>
+                <Image Source="/CDFCVideoExactor;component/Images/HomePage/btnWatch.png" Margin="18,0,0,0" ></Image>
+            </StackPanel>
+        </DockPanel>-->
+        
+        <Button Style="{DynamicResource EntranceBtnTemplate}"   Grid.Row="1"   Grid.Column="1"
+                Command="{Binding StepIntoEntranceCommand}" >
+            <Button.CommandParameter>
+                <enums:EntranceType>Capturer</enums:EntranceType>
+            </Button.CommandParameter>
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="/CDFCVideoExactor;component/Images/HomePage/btnWatcher.png" Style="{StaticResource NormalImg}" />
+                <Image Source="/CDFCVideoExactor;component/Images/HomePage/btnWatcherActive.png" Style="{StaticResource HoverImg}"  />
+                <StackPanel  Style="{StaticResource DesStack}"  >
+                    <TextBlock Text="{DynamicResource CapturerForensic}" Style="{StaticResource EntranceTitleTextBlockStyle}">
+
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource UnderlyTextBlockStyle}" Text="DVR Forensic Equipment" Margin="0,11,0,0" />
+                </StackPanel>
+            </StackPanel>
+        </Button>
+        <!--<Button Style="{DynamicResource EntranceBtnTemplate}"   Grid.Row="1"   Grid.Column="3"
+                Command="{Binding StepIntoEntranceCommand}" >
+            <Button.CommandParameter>
+                <enums:EntranceType>Mobile</enums:EntranceType>
+            </Button.CommandParameter>
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="/CDFCVideoExactor;component/Images/HomePage/btnPhone.png" Style="{StaticResource NormalImg}" />
+                <Image Source="/CDFCVideoExactor;component/Images/HomePage/btnPhoneActive.png" Style="{StaticResource HoverImg}"  />
+                <StackPanel  Style="{StaticResource DesStack}"  >
+                    <TextBlock Text="{DynamicResource MobileForensic}" Style="{StaticResource EntranceTitleTextBlockStyle}"/>
+                    <TextBlock Style="{StaticResource UnderlyTextBlockStyle}" Text="Mobile Device" Margin="0,11,0,0" />
+                </StackPanel>
+            </StackPanel>
+        </Button>-->
+        <Button Style="{DynamicResource EntranceBtnTemplate}"   Grid.Row="1"   Grid.Column="3"
+                Command="{Binding StepIntoEntranceCommand}" >
+            <Button.CommandParameter>
+                <enums:EntranceType>MultiMedia</enums:EntranceType>
+            </Button.CommandParameter>
+            <StackPanel Orientation="Horizontal" >
+                <Image Source="/CDFCVideoExactor;component/Images/HomePage/btnMultiMedia.png" Style="{StaticResource NormalImg}" />
+                <Image Source="/CDFCVideoExactor;component/Images/HomePage/btnMultiMediaActive.png" Style="{StaticResource HoverImg}"  />
+                <StackPanel  Style="{StaticResource DesStack}"  >
+                    <TextBlock Text="{DynamicResource MultiMediaForensic}" Style="{StaticResource EntranceTitleTextBlockStyle}">
+
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource UnderlyTextBlockStyle}" Text="MultiMedia Device" Margin="0,11,0,0" />
+                </StackPanel>
+            </StackPanel>
+        </Button>
+        <!--<Border Grid.Row="3" Grid.ColumnSpan="3"  BorderBrush="Gainsboro" >
+            <DockPanel >
+                <TextBlock Text="{DynamicResource CpForensicIns}"  Style="{StaticResource DetailTextBlockstyle}" DockPanel.Dock="Top"/>
+                <TextBlock Text="{x:Static helpers:ConfigState.SoftName}" VerticalAlignment="Bottom"  DockPanel.Dock="Top"
+                           HorizontalAlignment="Left" Margin="14,0,12,16"
+                           FontSize="14"/>
+            </DockPanel>
+        </Border>-->
+        <!-- <metros:ProgressRing Grid.Column="1" Style="{DynamicResource ProgressringTemplate}"  />-->
+    </Grid>
+
+</UserControl>

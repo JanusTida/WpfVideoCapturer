@@ -1,0 +1,439 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!--软件名-->
+    <sys:String x:Key="DaHuaSoftName">CFLab Dahua Surveillance Video Carve System</sys:String>
+    <sys:String x:Key="HaiKangSoftName">CFLab Haikang Surveillance Video Carve System</sys:String>
+    <sys:String x:Key="WFSSoftName">CFLab WFS Surveillance Video Carve System</sys:String>
+    <sys:String x:Key="CpAndMulSoftName" >CFLab Video Depth Carve System — Integrated Version</sys:String>
+    <sys:String x:Key="CpSoftName" >CFLab Surveillance Video Carve System</sys:String>
+    <sys:String x:Key="MulSoftName" >CFLab Media Video Carve System</sys:String>
+    <sys:String x:Key="CompanyName">Tian Yu Ning Da Techonology Co. Ltd.</sys:String>
+
+    <!--菜单栏-->
+    <sys:String x:Key="File">File</sys:String>
+    <sys:String x:Key="Exit">Exit</sys:String>
+    <sys:String x:Key="Edit">Edit</sys:String>
+    <sys:String x:Key="Logger">Logger</sys:String>
+    <sys:String x:Key="Setting">Settings</sys:String>
+    <sys:String x:Key="AdvancedScanSetting">AdvancedScanSetting</sys:String>
+
+    <!--多处共用-->
+    <sys:String x:Key="Confirm">Confirm</sys:String>
+    <sys:String x:Key="Cancel">Cancel</sys:String>
+    <sys:String x:Key="Total">All</sys:String>
+    <sys:String x:Key="Tip">Tip</sys:String>
+    <sys:String x:Key="UnknownErrorEncountered">Sorry,an unknown error encountered!</sys:String>
+    <sys:String x:Key="WatchStep">Wait a moment</sys:String>
+    <sys:String x:Key="Succeed">Succeed</sys:String>
+    <sys:String x:Key="ContactVendor">Please contact the vendor!</sys:String>
+    
+    <!--Software Initialization-->
+   
+    <!--Home Page-->
+    <sys:String x:Key="HomePage">Home Page</sys:String>
+    <sys:String x:Key="GoBack">Back</sys:String>
+    <sys:String x:Key="Register">Register</sys:String>
+    <sys:String x:Key="RecentLog">History</sys:String>
+
+    <sys:String x:Key="HardDisk">Disk</sys:String>
+    <sys:String x:Key="ImageFile">Image File</sys:String>
+
+    <sys:String x:Key="OpenRecord">Open</sys:String>
+    <sys:String x:Key="NewRecord">Create Record</sys:String>
+
+    <sys:String x:Key="ChooseFileType">Select File Type</sys:String>
+    
+    <!--注册窗体-->
+    <!--Basic Information-->
+    <sys:String x:Key="BasicInfo">Basic Information</sys:String>
+    <sys:String x:Key="Address">Address</sys:String>
+    <sys:String x:Key="AddressValue">Room 7088, NO.B3 Wuda Garden Road, Science&amp;Technology Park of Wuhan University,Donghu District,Wuhan City</sys:String>
+
+    <sys:String x:Key="Email">E-mail</sys:String>
+    <sys:String x:Key="Phone">Phone Number</sys:String>
+    <sys:String x:Key="OfficialSite">Official Website</sys:String>
+
+    <sys:String x:Key="CheckForUpdate">Check For Updates</sys:String>
+    <sys:String x:Key="NewVersionFound">New Version Found</sys:String>
+    <sys:String x:Key="VersionUpToDate">The current version is the latest.</sys:String>
+    <sys:String x:Key="ConfirmToUpdate">A new version found, proceed to update ?</sys:String>
+    <sys:String x:Key="ConfirmToStopCheck">Stop the checking process for updates?</sys:String>
+    <sys:String x:Key="RegisterError">Registration Error</sys:String>
+    <sys:String x:Key="ConfirmToRestartForUpdate">You need to reboot to enable the program. Reboot now?</sys:String>
+    <sys:String x:Key="RegisterSucceed">Register Success</sys:String>
+    <sys:String x:Key="ServerError">Server Error</sys:String>
+    <sys:String x:Key="NullRetVal">The return value is null!</sys:String>
+    <sys:String x:Key="InValidSn">Invalid Serial Number!</sys:String>
+    <sys:String x:Key="PleaseInputSn">Please enter the serial number!</sys:String>
+    <sys:String x:Key="InputError">Input error</sys:String>
+    <sys:String x:Key="InputEmail">Please enter an emial address</sys:String>
+    <sys:String x:Key="InputValidPhone">Please enter a valid phone number</sys:String>
+    <sys:String x:Key="InputValidEmail">Please enter a valid emial address</sys:String>
+    <sys:String x:Key="ValueCannotBeNull">Value can't be null</sys:String>
+    
+    <!--Software Registration-->
+    <sys:String x:Key="SoftWareRegistration">Software Registration</sys:String>
+    <sys:String x:Key="RegisterState">Registration Status</sys:String>
+    <sys:String x:Key="ContactPhone">Phone Number</sys:String>
+    <sys:String x:Key="HardID">Machine Code</sys:String>
+    <sys:String x:Key="SerialNumber">Serial Number</sys:String>
+    <sys:String x:Key="SubForRegister">Submit Registration</sys:String>
+    <sys:String x:Key="NotRegistered">Not Registered</sys:String>
+    <sys:String x:Key="Registered">Registered</sys:String>
+    
+    <!--Feedback Information-->
+    <sys:String x:Key="ContactInfo">Contact Information</sys:String>
+    <sys:String x:Key="FeedbackInformation">Feedback Information</sys:String>
+    <sys:String x:Key="FeedBackContent">Feedbacks</sys:String>
+    <sys:String x:Key="SubForFeedBack">Submit Feedback</sys:String>
+    <sys:String x:Key="PleaseInputContactInfo">Please input your contact information</sys:String>
+    <sys:String x:Key="PleaseInputFeedBackInfo">Please input your feedback information</sys:String>
+    
+    <!--磁盘视图-->
+    <sys:String x:Key="ChooseHardDisk">Select Disk</sys:String>
+    <sys:String x:Key="Refresh">Refresh</sys:String>
+    
+    <sys:String x:Key="DeviceName">Device</sys:String>
+    <sys:String x:Key="FileSystem">File System</sys:String>
+    <sys:String x:Key="ElapsedSpace">Used Space</sys:String>
+    <sys:String x:Key="RemainingSpace">Unallocated Space</sys:String>
+    <sys:String x:Key="TotalSpace">Total Space</sys:String>
+
+    <sys:String x:Key="ErroacquiringDiskInfo">Sorry, disk access error encountered</sys:String>
+    <sys:String x:Key="FailedToAcquireObject">Sorry,failed to acquire the object!</sys:String>
+
+    <!--打开镜像文件对话框-->
+    <sys:String x:Key="OpenImageFile">Open Image File</sys:String>
+    <sys:String x:Key="ImageFileSupported">Image File Supported</sys:String>
+    
+    <!--设定页-->
+    <sys:String x:Key="ChooseScanMethod">Select Scanning Mode</sys:String>
+    
+    <sys:String x:Key="EntireDiskScan">A full scan on the disk</sys:String>
+    <sys:String x:Key="EntireDisc">
+        Perform a simultaneous scan on the data in both used space and free space of the target file system, and carve the fragmentation data to form a playable video file.
+    </sys:String>
+    
+    <sys:String x:Key="FileSystemScan">File System Scan</sys:String>
+    <sys:String x:Key="FileSytemDisc">
+        Perform a quick scan on the data within file system area of the target embedded file system, and get the normal data.  
+    </sys:String>
+
+    <sys:String x:Key="Mp4Scan">MP4 Carve</sys:String>
+    <sys:String x:Key="Mp4Disc">
+        After a complete MP4 file is extracted through a full scan, if part of the video file has been overwritten, scan the MP4 fragmentations to perform a frame identifying scan on this overwritten part.Then repair the file based on the scanning results.
+    </sys:String>
+    
+    <sys:String x:Key="AreaScan">Area Scan</sys:String>
+    <sys:String x:Key="AreaDisc">
+        Set the jump value and perform a full quick skip scan on the disk. Use file time to locate the area of the target file. Then perform a RAW scanning on the located area by the function of setting the starting and ending location.The video data you need will then be quickly found. 
+    </sys:String>
+    
+    <sys:String x:Key="LeftScan">Unallocated Space Search</sys:String>
+    <sys:String x:Key="LeftDisc">
+        Scan the unallocated space in the target file system, and carve the fragentation data.
+    </sys:String>
+
+    <sys:String x:Key="Mp4WarnWord">As there are many variations of MP4,once fail to scan the software or recover data, please contact the vendor for a free upgrade.</sys:String>
+    
+    <!--高级设定对话框-->
+    <sys:String x:Key="SeniorScanSetting">Senior Scan Setting</sys:String>
+    <sys:String x:Key="SetScanStartSector">Starting Sector for Scanning</sys:String>
+    <sys:String x:Key="SetScanEndSector">Ending Sector for Scanning</sys:String>
+    <sys:String x:Key="SetClusterSize">Set Cluster Size</sys:String>
+    <sys:String x:Key="SetSectorSize">Set Sector Size</sys:String>
+    <sys:String x:Key="SetTimeOffset">Time Offset</sys:String>
+    <sys:String x:Key="SetFileOffset">File Offset</sys:String>
+
+    <sys:String x:Key="SameStartEndSector">The starting sector and ending sector must not be the same sector!</sys:String>
+    
+    <!--扫描中对话框-->
+    <sys:String x:Key="FileCount">File Counts</sys:String>
+    <sys:String x:Key="TotalSize">Total Size</sys:String>
+    <sys:String x:Key="StartTime">Start Time</sys:String>
+    <sys:String x:Key="ElapsedTime">ElapsedTime</sys:String>
+    <sys:String x:Key="RemainingTime">Remaining Time</sys:String>
+    <sys:String x:Key="SectorCountPassed">Scanned Sector</sys:String>
+    <sys:String x:Key="TotalSectorCount">Total Sectors</sys:String>
+    <sys:String x:Key="Speed">Speed</sys:String>
+    <sys:String x:Key="FailedToGetClusterSize">Failed to access file system parameters, please enter the cluster size in the scanningn settings.</sys:String>
+    <sys:String x:Key="FailedToGetFirmInfo">No information of supporting the MP4, please contact the vendor to gain support for the MP4 carving.</sys:String>
+    
+    
+    <!--文件列表结果页-->
+    <sys:String x:Key="ChooseTime">Select Time</sys:String>
+    <sys:String x:Key="ChooseChannel">Select Channel</sys:String>
+    <sys:String x:Key="FilterFileOffset">File Location Filter</sys:String>
+    <sys:String x:Key="FillterSize">Filter Size</sys:String>
+    <sys:String x:Key="ChannelNo">Channel</sys:String>
+    <sys:String x:Key="Completity">Integrity</sys:String>
+    <sys:String x:Key="FileSize">File Size</sys:String>
+    <sys:String x:Key="StartTimeCol">Start Time</sys:String>
+    <sys:String x:Key="EndTime">End Time</sys:String>
+    <sys:String x:Key="FileOffset">Location</sys:String>
+    <sys:String x:Key="ExtensionName">Extension</sys:String>
+    <sys:String x:Key="FileState">Status</sys:String>
+    <sys:String x:Key="Preview">Preview</sys:String>
+    <sys:String x:Key="Hex">Hexadecimal</sys:String>
+    <sys:String x:Key="ChannelNoFormat" xml:space="preserve">Port {0}</sys:String>
+    
+    <sys:String x:Key="RecoverCurFile">Recover Current</sys:String>
+    <sys:String x:Key="RecoverCheckedFile">Recover Checked</sys:String>
+    <sys:String x:Key="CheckSelected">Check Selected</sys:String>
+    <sys:String x:Key="UnCheckSelcted">Uncheck Selcted</sys:String>
+
+    <sys:String x:Key="EvaluatedVersion">Trial Version</sys:String>
+
+    <sys:String x:Key="ConfirmToCoverResult">This will cover the current results. Are you sure to do this?</sys:String>
+    <sys:String x:Key="ConfitmToUnSaveResult">Exit wil not retain the results, confirm to exit?</sys:String>
+    
+    
+    <!--创建案件窗体-->
+    <sys:String x:Key="CheckForNullCaseName">Enter the case name!</sys:String>
+    <sys:String x:Key="IllegalCaseName">Illegal character found in the case name!</sys:String>
+    
+    <!--记录加载相关-->
+    <sys:String x:Key="ConfirmToLoadLog">Related Records found, proceed to load?</sys:String>
+    <sys:String x:Key="LogFound">Records Found</sys:String>
+    <sys:String x:Key="SelectARecord">Record Selection</sys:String>
+    
+    
+    <!--恢复中对话框-->
+    <sys:String x:Key="FileRecover">File Recovery</sys:String>
+    <sys:String x:Key="SizeRecovered">Size Recovered</sys:String>
+    <sys:String x:Key="CountRecovered">Counts Recovered</sys:String>
+    <sys:String x:Key="OpenFolder">Open</sys:String>
+    
+    <!--碎片图表分析窗体-->
+    <sys:String x:Key="FragmentAnalyzer">Fragmentation Graph Analysis</sys:String>
+    <sys:String x:Key="ConfirmToCheckMp4Frag">Confirm to check the MP4 head and end fragmentation?</sys:String>
+    <sys:String x:Key="RecordSavingCompleted">Record Saving Completed!</sys:String>
+    
+    <!--图表标志说明-->
+    <sys:String x:Key="CurBlockNoFrag">No fragmentation in the current block.</sys:String>
+    <sys:String x:Key="CurBlockHasFrag">Fragmentation found in the current block.</sys:String>
+    <sys:String x:Key="CurBlockHasMp4Head">File Header(MP4) found in the current block.</sys:String>
+    <sys:String x:Key="CurBlockHasMp4Tile">File End(MP4) found in the current block.</sys:String>
+    <sys:String x:Key="CurBlockHasFragSld">Viewed fragmentations exist in the current block.</sys:String>
+    <sys:String x:Key="CurBlockBeenItd">The current block is within the intercept range.</sys:String>
+    <sys:String x:Key="CurBlockBeenChd">The current block has been selected</sys:String>
+    
+    <!--碎片查看器窗体-->
+    <sys:String x:Key="FragViewer">Fragmentation Viewer</sys:String>
+    <sys:String x:Key="Mp4HeadViewer">MP4 File Header Viewer</sys:String>
+    <sys:String x:Key="Mp4TileViewer">Mp4 File End Viewer</sys:String>
+    <sys:String x:Key="SetAsStartMp4Head">Set as starting file header(MP4)</sys:String>
+    <sys:String x:Key="SetAsStartMp4Tile">Set as starting file end(MP4)</sys:String>
+    <sys:String x:Key="ChooseOutputDirec">Please select output location</sys:String>
+    <sys:String x:Key="BrandLimited">Sorry,the current version only supports Dahua/WFS.</sys:String>
+    <sys:String x:Key="ConfirmToBrowseFrag">Fragmentation saving completed, review now?</sys:String> 
+    
+    <!--多处共用2-->
+    <sys:String x:Key="Close">Close</sys:String>
+    <sys:String x:Key="Operation">Operation</sys:String>
+    <sys:String x:Key="OutPut">Export</sys:String>
+    <sys:String x:Key="DeviceType">Device Type</sys:String>
+    <sys:String x:Key="Select">Select</sys:String>
+    <sys:String x:Key="SavingCompleted">Saving Completed</sys:String>
+    <sys:String x:Key="FailedToOpenFolder">Fail to open the folder!Please open manually。</sys:String>
+    <sys:String x:Key="FailedToRecoverFile">Fail to recover the file!</sys:String>
+    
+    <!--起始类型选择页-->
+    <sys:String x:Key="ChooseDeviceType">Select Device Type</sys:String>
+    <sys:String x:Key="CapturerForensic">Video Forensics</sys:String>
+    <sys:String x:Key="CpForensicIns">Video Extractions from various brands of camera.</sys:String>
+    <sys:String x:Key="MobileForensic">Mobile Video Forensics</sys:String>
+    <sys:String x:Key="MultiMediaForensic">Multimedia Video Forensics</sys:String>
+
+    <!--多媒体设定页-->
+    <sys:String x:Key="ChooseMediaType">Select Media Type</sys:String>
+    <sys:String x:Key="MediaCamera">Multimedia Camera</sys:String>
+    <sys:String x:Key="DriveRecorder">Automobile Data Recorder</sys:String>
+    <sys:String x:Key="ForensicRecorder">Site Enforcement Recorder</sys:String> 
+    
+    <!--加密狗相关-->
+    <sys:String x:Key="DongleNotFound">Sorry，Dongle not found!</sys:String>
+    <sys:String x:Key="DongleSnNotFound">Serial Number not found,please check again!</sys:String>
+    <sys:String x:Key="DongleExpiredForVersion">This version is beyond the Dongle's valid date. Please continue to use the former version or contact the vendor for a upgrade!</sys:String>
+    <sys:String x:Key="DongleExpired">The Dongle has passed the expiry date:</sys:String>
+    <sys:String x:Key="DongleDateConvertError">Delayed Date Conversion Error!</sys:String>
+   
+    <!--起始页2-->
+    <sys:String x:Key="FaiedToOpenImageFile">Failed to open the image file, please check again.</sys:String>
+
+    <!--记录加载相关2-->
+    <sys:String x:Key="FailedToReadRecord">Failed to read the records:</sys:String>
+    <sys:String x:Key="FailedToOpenRecord">Failed to open the records</sys:String>
+    <sys:String x:Key="FailedToOpenRecentFile">Failed to open the recent historical file!</sys:String>
+    <sys:String x:Key="FailedToOpenRecentRecord">Failed to open the historical record!</sys:String>
+    <sys:String x:Key="NoRecordToCheck">No records found, please check again!</sys:String>
+    <sys:String x:Key="ErrorWhenCheckingRecent">Wrong historical data!</sys:String>
+    <sys:String x:Key="FailedToAquireRencentRecord">Failed to acquire the historical records!</sys:String>
+    <sys:String x:Key="CaseFile">Case File</sys:String>
+    
+    <!--主窗体2-->
+    <sys:String x:Key="FailedToAquireDevices">Failed to access the device!</sys:String>
+    
+    <!--文件列表页2-->
+    <sys:String x:Key="FeatureLimited">Please contact the vendor for this function</sys:String>
+    <sys:String x:Key="FragAnaBuilding">Fragmentation graph is being generated!</sys:String>
+    <sys:String x:Key="CurFileNoFrag">No Fragmentation in the File!</sys:String>
+    <sys:String x:Key="ShowInFragGraph">Show In Graph</sys:String>
+    <!--证书验证相关-->
+    <sys:String x:Key="LicenseHardIdNotMatched">Hardware ID does not match with the device</sys:String>
+    <sys:String x:Key="LicenseValidateError">License Verification Error,please check again。</sys:String>
+    <sys:String x:Key="ConfirmToReRegister">You have passed trial period,register now？</sys:String>
+    <sys:String x:Key="EvaluateTerminated">Trial Version Terminated</sys:String>
+    <sys:String x:Key="UnknownLicentseError">Unknown License Error</sys:String>
+    <sys:String x:Key="TimeValidateError">Time Verification Error :Please check again!</sys:String>
+    <sys:String x:Key="ConfirmToReLoad">Server Error:Please download the lastest trial version at www.cflab.net!</sys:String>
+    <sys:String x:Key="WrongLicenseFieldCount">License field counts error: please check!</sys:String>
+    <sys:String x:Key="RegisterBroken">Registration procedure damaged, please download the lastest version athttp://www.cflab.net!</sys:String>
+
+    <!--碎片图表分析窗体2-->
+    <sys:String x:Key="ReScanSelectedArea">Rescan the selected area</sys:String>
+    <sys:String x:Key="RecompositeMP4File">Reorganize the selected area (MP4)</sys:String>
+    <sys:String x:Key="ShowMp4HeadTileFrags">Show details of MP4 file-header/ file-end</sys:String>
+    <sys:String x:Key="SaveAsNewMP4File">Save the selected block as a new file(MP4)</sys:String>
+    <sys:String x:Key="SetAsScanStart">Scanning Start Setting</sys:String>
+    <sys:String x:Key="SetAsScanEnd">Scanning End Setting</sys:String>
+    <sys:String x:Key="CurSectorHasNoHead">No file-header found in the current sector!</sys:String>
+    <sys:String x:Key="FailedToAquireClusterSize">Failed to acquire cluster size!</sys:String>
+    <sys:String x:Key="CopyError">Copy Error</sys:String>
+    <sys:String x:Key="ConfirmToBrowseFile">Review the file now?</sys:String>
+    <sys:String x:Key="ConfirmToSaveFile">Carving completed,proceed to save the file?</sys:String>
+
+    <!--恢复中对话框2-->
+    <sys:String x:Key="TotalFileCount">Total File Counts</sys:String>
+
+    <!--多处共用-->
+    <sys:String x:Key="Sector">Sector</sys:String>
+    <sys:String x:Key="Second">Second</sys:String>
+    <sys:String x:Key="Byte">Byte</sys:String>
+    <sys:String x:Key="Error">Error</sys:String>
+    <!--图表标志说明2-->
+    <sys:String x:Key="FragSignInstruction">Graphs Instruction</sys:String>
+
+    <!--创建案件窗体2-->
+    <!--注意,此处语句含有变量{0},即案件名称，翻译者请根据用同样的方式将其放置在正常的语序中-->
+    <sys:String x:Key="CaseCreateSucceedFormat">Succeeded to create{0}case!</sys:String>
+    <sys:String x:Key="CaseCreateFailedFormat">Failed to create{0}case!</sys:String>
+
+
+    <!--注册窗体2-->
+    <sys:String x:Key="SerialFeatureNotMatched">Serial Number Modules not match!</sys:String>
+    <sys:String x:Key="CheckForRegisterCode">Please check registration code!</sys:String>
+    <sys:String x:Key="SeeLogToCheckForRegisterError">registry error,please see the log for details!</sys:String>
+
+    <!--记录加载2-->
+    <sys:String x:Key="ConfirmToLoadCaseWhileNull">No related record found, proceed to load the case??</sys:String>
+    <sys:String x:Key="RecordNotFound">Record not found</sys:String>
+    <sys:String x:Key="ConfirmToLoadRecordWhileFound">Related records found，proceed to load the records?</sys:String>
+    <sys:String x:Key="UnknownErrorWhileLoadCase">Sorry,unknown file-reading error!</sys:String>
+    <sys:String x:Key="FailedToGetRelaventSetting">Related aquisition setting error, please check again</sys:String>
+    <sys:String x:Key="ObjectNotFound">Object not found</sys:String>
+
+    <!--主窗体3-->
+    <sys:String x:Key="UnmatchedObjectAndLog">Sorry,selected object does not match with log, please check again!</sys:String>
+    <sys:String x:Key="FailedToRefreshDevice">Failed to refresh the device</sys:String>
+
+    <!--设定页-->
+    <sys:String x:Key="FailedToInit">Sorry, initialization error! Please try to reboot the program</sys:String>
+
+    <!--扫描中对话框2-->
+    <sys:String x:Key="ConfirmToStopScan">Confirm to stop scanning?</sys:String>
+
+    <!--高级设定窗体2-->
+    <sys:String x:Key="StartSecLargerThanEndSec">The starting sector is set to be beyond ending sector!</sys:String>
+    <sys:String x:Key="EndSecOutOfRange">The ending sector is set to be beyond total sector counts!</sys:String>
+    <sys:String x:Key="FailedToSaveSetting">Save Setting Error</sys:String>
+
+    <!--多处共用3-->
+    <sys:String x:Key="PleaseCheckInput">Please Check Input</sys:String>
+
+    <!--扫描中对话框3-->
+    <sys:String x:Key="Scanning">Scanning</sys:String>
+    <sys:String x:Key="CheckingFiles">File Verifying</sys:String>
+    <sys:String x:Key="ScanningDone">Scanning Completed</sys:String>
+
+    <!--多处共用4-->
+    <sys:String x:Key="Deleted">Deleted</sys:String>
+    <sys:String x:Key="Normal">Normal</sys:String>
+    <sys:String x:Key="Covered">Covered</sys:String>
+    <sys:String x:Key="Comma">:</sys:String>
+    
+    <!--反馈信息2-->
+    <sys:String x:Key="ThanksForFeedBack">FeedBack submited,thank you!</sys:String>
+
+    <!--序列号校验-->
+    <sys:String x:Key="InvalidSN">Invalid SerialNumber</sys:String>
+    <sys:String x:Key="HardIdNotMatched">Hard Id Not Matched</sys:String>
+    <sys:String x:Key="SnExpired">The Serial Number Expired</sys:String>
+    <sys:String x:Key="ErrorCheckingUpdate">Error Checking Update</sys:String>
+    <sys:String x:Key="TimeModified">Time Modification Detected</sys:String>
+
+    <!--文件结果页4-->
+    <sys:String x:Key="ThumbNail">ThumbNail</sys:String>
+
+
+
+    <!--加载镜像文件-->
+    <sys:String x:Key="ErrorWhileLoadingImg">Image File Loading Error</sys:String>
+
+    <!--多处公用-关于-->
+    <sys:String x:Key="About">About</sys:String>
+    <sys:String x:Key="AddressKey">Address：</sys:String>
+    <sys:String x:Key="EmailKey">Email：</sys:String>
+    <sys:String x:Key="EmailValue">support@cflab.net</sys:String>
+    <sys:String x:Key="PhoneNumberKey">Phone Number：</sys:String>
+    <sys:String x:Key="PhoneNumberValue">400-6090906</sys:String>
+    <sys:String x:Key="OriginSiteKey">Website：</sys:String>
+    <sys:String x:Key="OriginSiteValue">www.cflab.net</sys:String>
+    <sys:String x:Key="AttatchedSiteValue">www.cflab.cn</sys:String>
+    <sys:String x:Key="HelperStringValue">Pleasr contact us for Data Recovery, Data Erasure， Computer Forensics, Fraud Investigation or Legal Assistance！</sys:String>
+    <sys:String x:Key="ScanForHelp">Scan For Help</sys:String>
+    
+    <!--环境检测-->
+    <sys:String x:Key="UnIntalledDependencies">Found Dependencies Uninstalled.</sys:String>
+    <sys:String x:Key="ConfirmToInstall">Confirm to install</sys:String>
+
+    <sys:String x:Key="DaHuaNVR">Dahua NVR</sys:String>
+    <sys:String x:Key="DaHuaDHFS">Dahua DHFS</sys:String>
+    <sys:String x:Key="HaiShiTai">HiSiDe</sys:String>
+
+    <sys:String x:Key="YinTan">Tiandy</sys:String>
+    <sys:String x:Key="UnKnownVersionType">UnKnown Type</sys:String>
+    <sys:String x:Key="WJCL">Weigav</sys:String>
+    <sys:String x:Key="XiaoMi">XiaoMi</sys:String>
+    <sys:String x:Key="QiDun">QiDun</sys:String>
+    
+    <sys:String x:Key="ExtractingFrames">Extracting Frames</sys:String>
+    <sys:String x:Key="ExtractingCompleted">Frame Extracting Completed</sys:String>
+    <sys:String x:Key="FramesBeingSaved">Saving</sys:String>
+    <sys:String x:Key="SucceedExtractingFormat">{0}JPG files extracted, confirm to open the folder?</sys:String>
+    <sys:String x:Key="FeatureLimitedFormat">The function is only available to {0}</sys:String>
+    <sys:String x:Key="ExtractJpeg"> Frame-extracting for JPG</sys:String>
+                
+    <sys:String x:Key="ChuangZe">Tris Vision</sys:String>
+    <sys:String x:Key="AnLian">Raysharp</sys:String>
+    <sys:String x:Key="Canon">Canon</sys:String>
+    <sys:String x:Key="DaHua">Dahua</sys:String>
+    <sys:String x:Key="HaiSi">Haisi</sys:String>
+    <sys:String x:Key="HanBang">Han Bang</sys:String>
+    <sys:String x:Key="HaiKang">HikVision</sys:String>
+    <sys:String x:Key="ZhongWei">Jovision</sys:String>
+    <sys:String x:Key="XingKang">XingKang</sys:String>
+    <sys:String x:Key="H264">H264 CCTV</sys:String>
+    <sys:String x:Key="RuiShi">RuiShi</sys:String>
+    <sys:String x:Key="Sony">Sony</sys:String>
+    <sys:String x:Key="Panasonic">Panasoic</sys:String>
+    <sys:String x:Key="WFS">WFS CCTV </sys:String>
+    <sys:String x:Key="GoPro">GoPro</sys:String>
+    <sys:String x:Key="LingDu">Black View</sys:String>
+    <sys:String x:Key="JingYi">Jingyi Police Body-worn Camera</sys:String>
+    <sys:String x:Key="ShanLing">Zenlane</sys:String>
+    <sys:String x:Key="XingJi">Senken Site Enforcement Recorder</sys:String>
+    <sys:String x:Key="UnknownCar">Unknown Brand</sys:String>
+    <sys:String x:Key="Unknown">Unknown Device</sys:String>
+</ResourceDictionary>

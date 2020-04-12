@@ -1,0 +1,188 @@
+﻿<metros:MetroWindow x:Class="CDFCVideoExactor.SeniorScanSettingWindow"
+        xmlns:metros="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:local="clr-namespace:CDFCVideoExactor" ResizeMode="NoResize"
+        xmlns:behaviors="clr-namespace:CDFCBehaviors.Input;assembly=CDFCBehaviors"
+                    WindowStartupLocation="CenterScreen"
+         WindowTitleBrush="#242424" BorderBrush="Black" IsEnabled="{Binding IsEnabled}"
+                    IsEnabledChanged="SeniorScanSettingWindow_IsEnabledChanged"
+        mc:Ignorable="d" BorderThickness="1,0,1,1" Closing="SeniorScanSettingWindow_Closing"
+        Title="高级扫描设定" Height="200" Width="500">
+    <Window.InputBindings>
+        <KeyBinding Key="Enter" Command="{Binding ConfirmCommand}">
+            <KeyBinding.CommandParameter>
+                <system:Boolean>True</system:Boolean>
+            </KeyBinding.CommandParameter>
+        </KeyBinding>
+    </Window.InputBindings>
+    <metros:MetroWindow.WindowCloseButtonStyle>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </metros:MetroWindow.WindowCloseButtonStyle>
+    <Window.Resources>
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <Style x:Key="SeniorObjectSettingTextBoxStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Background" Value="#E2E2E2"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="InputMethod.IsInputMethodEnabled" Value="False"/>
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="Margin" Value="10,10,0,0"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Width" Value="70"/>
+            <Setter Property="InputMethod.IsInputMethodEnabled" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" CornerRadius="6" Padding="2,0,0,0"  BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <DockPanel >
+                                <ScrollViewer x:Name="PART_ContentHost" VerticalAlignment="Center" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                            </DockPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocused" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <MultiTrigger>
+                    <MultiTrigger.Conditions>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
+                        <Condition Property="IsSelectionActive" Value="false"/>
+                    </MultiTrigger.Conditions>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                </MultiTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid x:Name="taskGrid"  >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style TargetType="{x:Type TextBlock}" >
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+                <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+                <Setter Property="Margin" Value="10,10,0,0"/>
+            </Style>
+        </Grid.Resources>
+        <TextBlock  Text="起始扫描扇区:"  />
+        <TextBox  TabIndex="0" x:Name="txbOriSector" Style="{StaticResource SeniorObjectSettingTextBoxStyle}" Grid.Column="1" >
+            <i:Interaction.Behaviors>
+                <behaviors:TextBoxInputRegExBehaviour MaxLength="16" RegularExpression="^\d+$"  EmptyValue="0" />
+            </i:Interaction.Behaviors>
+            <TextBox.Text>
+                <Binding Path="IniSector" ValidatesOnDataErrors="True" UpdateSourceTrigger="PropertyChanged">
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBlock  Text="终止扫描扇区:" HorizontalAlignment="Right" Grid.Column="3" />
+        <TextBox TabIndex="1" x:Name="txbEndSector" Style="{StaticResource SeniorObjectSettingTextBoxStyle}" Text="{Binding Path=EndSector,UpdateSourceTrigger=PropertyChanged}"   Grid.Column="4">
+            <i:Interaction.Behaviors>
+                <behaviors:TextBoxInputRegExBehaviour MaxLength="16" RegularExpression="^\d+$"  EmptyValue="0" />
+            </i:Interaction.Behaviors>
+        </TextBox>
+        <TextBlock Grid.Row="2" >
+            簇大小设置:
+        </TextBlock>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1">
+            <TextBox TabIndex="2" Text="{Binding  ClusterSize,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource SeniorObjectSettingTextBoxStyle}"
+                     IsEnabled="{Binding ObjectScanSetting.CanUserSetClusterSize}"  >
+                <i:Interaction.Behaviors>
+                    <behaviors:TextBoxInputRegExBehaviour MaxLength="4" RegularExpression="^\d+$"  EmptyValue="0" />
+                </i:Interaction.Behaviors>
+            </TextBox>
+            <TextBlock Text="(扇区)"/>
+        </StackPanel>
+        <TextBlock  Text="扇区大小:"  Grid.Column="3" HorizontalAlignment="Right" Grid.Row="2" />
+        <TextBox Style="{StaticResource SeniorObjectSettingTextBoxStyle}" TabIndex="3" x:Name="txbSectorSize" Text="{Binding  SectorSize,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="4" Grid.Row="2">
+            <i:Interaction.Behaviors>
+                <behaviors:TextBoxInputRegExBehaviour MaxLength="4" RegularExpression="^\d+$"  EmptyValue="0" />
+            </i:Interaction.Behaviors>
+        </TextBox>
+        <TextBlock Grid.Row="3" Text="时间调整:"/>
+        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal">
+            <TextBox TabIndex="4" Text="{Binding Path= TimePos,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource SeniorObjectSettingTextBoxStyle}" >
+                <i:Interaction.Behaviors>
+                    <behaviors:TextBoxInputRegExBehaviour MaxLength="16" RegularExpression="^\d+$"  EmptyValue="0" />
+                </i:Interaction.Behaviors>
+            </TextBox>
+            <TextBlock Text="(秒)"/>
+        </StackPanel>
+        <TextBlock Grid.Row="3" Grid.Column="3" Text="文件偏移LBA:"  HorizontalAlignment="Right" Margin="0,10,0,0"/>
+        <StackPanel Grid.Row="3" Grid.Column="4" Orientation="Horizontal">
+            <TextBox TabIndex="5" Text="{Binding Path= LbaPos,UpdateSourceTrigger=PropertyChanged}" 
+                     Style="{StaticResource SeniorObjectSettingTextBoxStyle}">
+                <i:Interaction.Behaviors>
+                    <behaviors:TextBoxInputRegExBehaviour MaxLength="16" RegularExpression="^\d+$"  EmptyValue="0" />
+                </i:Interaction.Behaviors>
+            </TextBox>
+            <TextBlock Text="(字节)"/>
+        </StackPanel>
+        <Grid Grid.Row="6" Grid.ColumnSpan="5">
+            <StackPanel Margin="0,10" Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button   Content="确定"  Command="{Binding ConfirmCommand}"
+                          VerticalAlignment="Top" TabIndex="16" Foreground="White"  Style="{DynamicResource SureBtnStyle}"  Margin="40,0" >
+                    <Button.CommandParameter>
+                        <system:Boolean>
+                            True
+                        </system:Boolean>
+                    </Button.CommandParameter>
+                </Button>
+                <Button  x:Name="btnCancel" Content="取消" Command="{Binding ConfirmCommand}"
+                         Foreground="White"  Margin="38,0" Style="{DynamicResource SureBtnStyle}" Height="20" VerticalAlignment="Top">
+                    <Button.CommandParameter>
+                        <system:Boolean>
+                            False
+                        </system:Boolean>
+                    </Button.CommandParameter>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+    
+</metros:MetroWindow>

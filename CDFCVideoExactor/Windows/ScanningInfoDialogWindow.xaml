@@ -1,0 +1,162 @@
+﻿<metros:MetroWindow x:Class="CDFCVideoExactor.ScanningInfoDialogWindow"
+        xmlns:metros="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+        xmlns:local="clr-namespace:CDFCVideoExactor" IsCloseButtonEnabled="False" 
+        xmlns:cvts="clr-namespace:CDFCConverters.Converters.ScanningInfoDialogWindow;assembly=CDFCConverters"
+        xmlns:publicCvts="clr-namespace:CDFCConverters.Converters;assembly=CDFCConverters"
+        mc:Ignorable="d" BorderBrush="Black" WindowTitleBrush="#242424"
+        WindowStartupLocation="CenterScreen" Title="{Binding TitleWords}"
+        ResizeMode="NoResize"  IsEnabled="{Binding IsEnabled,Mode=OneWay}"
+         Closing="ScanningInfoDialogWindow_Closing"  
+        IsEnabledChanged="ScanningInfoDialogWindow_IsEnabledChanged"
+         Height="394" SizeToContent="Width">
+    <metros:MetroWindow.WindowCloseButtonStyle>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </metros:MetroWindow.WindowCloseButtonStyle>
+    <Window.Resources>
+        <!--所需转换器-->
+        <cvts:ProgressBarValueToAngleConverter x:Key="ProgressBarValueToAngleConverter"/>
+        <cvts:ProgressBarValueToRotateAngleConverter x:Key="ProgressBarValueToRotateAngleConverter"/>
+        <cvts:CurFileCountAndTotalCountConverter x:Key="CurFileCountAndTotalCountConverter"/>
+        <publicCvts:ByteSizeToSizeConverter x:Key="ByteSizeToSizeConverter"/>
+        <publicCvts:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <publicCvts:DateTimeConverter x:Key="DateTimeConverter"/>
+        
+        <Style x:Key="LoopProcessBar" TargetType="{x:Type ProgressBar}">
+            <Setter Property="Background" Value="#E2E2E2"/>
+            <Setter Property="Width" Value="300"/>
+            <Setter Property="Height" Value="300"/>
+            <Setter Property="BorderBrush" Value="#3185BF">
+                <!--<LinearGradientBrush>
+                        <LinearGradientBrush.Transform>
+                            <RotateTransform CenterX="104" CenterY="104" Angle="{Binding Value,Mode=OneWay,
+                                RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ProgressBar}},Converter={StaticResource ProgressBarValueToRotateAngleConverter}}"/>
+                        </LinearGradientBrush.Transform>
+                        <GradientStop Offset="1" Color="#3185BF"/>
+                        <GradientStop Offset="0" Color="Transparent"/>
+                    </LinearGradientBrush>-->    
+            </Setter>
+            <Setter Property="BorderThickness" Value="60"/>
+            <Setter Property="Foreground" Value="#3185BF"/>
+            <Setter Property="Maximum" Value="100"/>
+            <Setter Property="Minimum" Value="0"/>
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="IsHitTestVisible" Value="False"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ProgressBar}">
+                        <Viewbox Stretch="Uniform"  VerticalAlignment="Center" HorizontalAlignment="Center">
+                            <Grid   SnapsToDevicePixels="True" Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" >
+                                <!--背景环-->
+                                <ed:Arc 
+                                    ArcThickness="12"
+                                    StartAngle="0" Fill="{TemplateBinding Background}" EndAngle="360" Stretch="None" x:Name="arcOuter" />
+                                <!--值-环-->
+                                <ed:Arc  x:Name="arcValue" 
+                                    ArcThickness="12"
+                                    StartAngle="0" Fill="{TemplateBinding BorderBrush}"
+                                         EndAngle="{Binding Value,Mode=OneWay,RelativeSource={RelativeSource TemplatedParent},
+                                    Converter={StaticResource ProgressBarValueToAngleConverter}}"
+                                Stretch="None"  Panel.ZIndex="2" >
+                                    
+
+                                </ed:Arc>
+                                
+                                <!--数值-->
+                                <TextBlock FontSize="34" 
+                                       Text="{Binding Value,Mode=OneWay,RelativeSource={RelativeSource TemplatedParent},StringFormat={}{0}%}" 
+                                       VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Grid>
+                        </Viewbox>
+                        <!--<ControlTemplate.Triggers>
+                            <Trigger Property="Value" Value="100">
+                                <Setter TargetName="arcValue" Property="Fill" Value="#3185BF"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>-->
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </Window.Resources>
+    <StackPanel>
+        <metros:MetroProgressBar Value="{Binding CurPercentage}" Width="208" Height="208" Style="{StaticResource LoopProcessBar}" Margin="0,20,0,0" />
+        <Grid >
+            <Grid.Resources>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="FontSize" Value="16"/>
+                    <Setter Property="Foreground" Value="#3185BF" />
+                    <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+                </Style>
+                <Style TargetType="{x:Type StackPanel}">
+                    <Setter Property="Orientation" Value="Horizontal"/>
+                </Style>
+            </Grid.Resources>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="33"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="24"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="12"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="24"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1">
+                <TextBlock ><Run Text="{DynamicResource FileCount}" /><Run Text="{DynamicResource Comma}"/></TextBlock>
+                <TextBlock Text="{Binding FileCount}" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="1">
+                <TextBlock ><Run Text="{DynamicResource TotalSize}" /><Run Text="{DynamicResource Comma}"/></TextBlock>
+                <TextBlock  Text="{Binding TotalFileSize,Mode=OneWay,Converter={StaticResource ByteSizeToSizeConverter}}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="2">
+                <TextBlock ><Run Text="{DynamicResource SectorCountPassed}" />/<Run Text="{DynamicResource TotalSectorCount}"/><Run Text="{DynamicResource Comma}"/></TextBlock>
+                <TextBlock Text="{Binding SectorState}" MinWidth="180" />
+            </StackPanel>
+
+            <StackPanel  Grid.Column="3" Grid.Row="1">
+                <TextBlock ><Run Text="{DynamicResource StartTime}"/><Run Text="{DynamicResource Comma}"/></TextBlock>
+                <TextBlock  Text="{Binding StartDate,Mode=OneTime,Converter={StaticResource DateTimeConverter}}" />
+            </StackPanel>
+            <StackPanel Grid.Column="3" Grid.Row="2">
+                <TextBlock ><Run Text="{DynamicResource ElapsedTime}"/><Run Text="{DynamicResource Comma}"/></TextBlock>
+                <TextBlock Text="{Binding ElapsedTime,Mode=OneWay,Converter={x:Static publicCvts:TimeSpanToTimeString.StaticInstance}}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="3" Grid.Row="3">
+                <TextBlock  ><Run Text="{DynamicResource RemainingTime}"/><Run Text="{DynamicResource Comma}"/></TextBlock>
+                <TextBlock Text="{Binding RemainingTime,Mode=OneWay,Converter={x:Static publicCvts:TimeSpanToTimeString.StaticInstance}}" />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="3">
+                <TextBlock ><Run Text="{DynamicResource Speed}"/><Run Text="{DynamicResource Comma}"/></TextBlock>
+                <TextBlock Text="{Binding Speed,Mode=OneWay,Converter={x:Static publicCvts:SpeedNumToSpeedStringConverter.StaticInstance}}" />
+            </StackPanel>
+            <DockPanel Grid.Row="4" Grid.ColumnSpan="5" >
+                <Button Command="{Binding StopScanCommand}"
+                        HorizontalAlignment="Center" Style="{DynamicResource SureBtnStyle}" 
+                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                        Visibility="{Binding IsScanning,Converter={StaticResource BoolToVisibilityConverter}}"
+                        DockPanel.Dock="Top" Content="{DynamicResource Cancel}"  Foreground="White" FontSize="16" VerticalAlignment="Bottom"/>
+                <Button Command="{Binding ConfirmCommand}" HorizontalAlignment="Center" Style="{DynamicResource SureBtnStyle}" 
+                        Foreground="White" FontSize="16"
+                        Visibility="{Binding IsScanning,Converter={StaticResource BoolToVisibilityConverter},
+                    ConverterParameter=2}" Content="{DynamicResource Confirm}" VerticalAlignment="Bottom"/>
+            </DockPanel>
+        </Grid>
+    </StackPanel>
+</metros:MetroWindow>

@@ -1,0 +1,76 @@
+void MainWindow::Init_GetDeviceTree()
+{
+    /*
+     * 因为树由3个链表拼接，为方便定位，将树的第6列进行标志列   计算机/镜像 0 磁盘 1 分区2  镜像文件root3 实际镜像文件4
+     * 第一列        第二列       第三列         第四列         第5列      第6列     第7列
+     * 设备/名称      标签        系统格式        大小（字节）   大小(扇区)   标志    保存镜像句柄
+     */
+    m_Img_root = NULL;
+    ui->Device_treeWidget->setColumnHidden(4,true);
+    ui->Device_treeWidget->setColumnHidden(5,true);
+    ui->Device_treeWidget->setColumnHidden(6,true);
+
+    stHDDInfo *cur_HDDInfo =(stHDDInfo *)htLib::get_hdd_vender();
+    _Partiton_List *cur_Partiton = htLib::huitian_get_partition();
+    _Device_List *cur_Devicelist = htLib::huitian_get_device();
+    m_Devicelist = cur_Devicelist;
+    m_Partiton   = cur_Partiton;
+    m_HDDInfo    = cur_HDDInfo;
+
+    QTreeWidgetItem *root =new QTreeWidgetItem(ui->Device_treeWidget);
+    root->setIcon(0,QIcon(":/harddevice"));
+    root->setText(0,QString("%1").arg(QApplication::translate("QTreeWidgetItem","计算机",0)));
+    root->setText(5,QString("%1").arg(0));
+    while(cur_Devicelist!=NULL)
+    {
+        if(cur_Devicelist->m_ThisDevice->m_LoGo!=16)
+        {
+            QTreeWidgetItem *p=new QTreeWidgetItem(root);
+            p->setIcon(0,QIcon(":/harddevice"));
+            for(cur_HDDInfo=m_HDDInfo; cur_HDDInfo!=NULL; cur_HDDInfo =cur_HDDInfo->Next)
+            {
+                if(cur_HDDInfo->id == cur_Devicelist->m_ThisDevice->m_LoGo)
+                {
+                    if(cur_HDDInfo->info!=NULL)
+                    {
+                        p->setText(0,QString("%1-%2").arg((char*)cur_HDDInfo->info->szModelNumber).arg(cur_HDDInfo->id));
+                    }
+                    else
+                    {
+                        p->setText(0,QString("%1-%2").arg((char*)cur_HDDInfo->VendorID).arg(cur_HDDInfo->id));
+                    }
+                }
+            }
+            p->setText(1,QString("%1").arg(QString::fromLocal8Bit(cur_Devicelist->m_ThisDevice->Lable)));//磁盘标签
+            p->setText(2,QString("%1").arg(htLib::Systype_list.at(cur_Devicelist->m_ThisDevice->m_DevType)));
+            p->setText(3,QString("%1").arg(cur_Devicelist->m_ThisDevice->m_DevSize));
+            p->setText(4,QString("%1").arg(cur_Devicelist->m_ThisDevice->m_DevSize/512));
+            p->setText(5,QString("%1").arg(1));
+
+            for(cur_Partiton=m_Partiton;cur_Partiton!=NULL;cur_Partiton=cur_Partiton->m_next)
+            {
+                if(cur_Partiton->m_ThisPartiton->m_LoGo == cur_Devicelist->m_ThisDevice->m_LoGo)
+                {
+                    QTreeWidgetItem *Child =new QTreeWidgetItem(p);
+                    Child->setIcon(0,QIcon(":/harddevice"));
+                    Child->setText(0,QString("%1").arg(cur_Partiton->m_ThisPartiton->m_Sign));//分区盘符
+                    Child->setText(1,QString("%1").arg(QString::fromLocal8Bit((char*)cur_Partiton->m_ThisPartiton->m_Name)));//分区标签
+                    Child->setText(2,QString("%1").arg(htLib::Systype_list.at(cur_Partiton->m_ThisPartiton->m_Type)));//系统类型
+                    Child->setText(3,QString("%1").arg(cur_Partiton->m_ThisPartiton->m_Size));//大小
+                    Child->setText(4,QString("%1").arg(cur_Partiton->m_ThisPartiton->m_Size/512));//大小
+                    Child->setText(5,QString("%1").arg(2));
+                }
+            }
+        }
+        cur_Devicelist = cur_Devicelist->m_next;
+    }
+    //设置列宽
+    for(int colum_index=0;colum_index<ui->Device_treeWidget->columnCount();colum_index++)
+        ui->Device_treeWidget->setColumnWidth(colum_index,130);
+    //对第一列进行正序排列
+    ui->Device_treeWidget->sortByColumn(0,Qt::AscendingOrder);
+    //展开全部树
+    ui->Device_treeWidget->expandAll();
+    qDebug()<<m_MaxLenForColums;
+    //htLib::exit_hdd_vender();
+}

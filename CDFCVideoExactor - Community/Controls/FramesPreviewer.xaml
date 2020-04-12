@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="CDFCVideoExactor.Controls.FramesPreviewer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CDFCVideoExactor.Controls"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:behaviors="clr-namespace:CDFCBehaviors.Input;assembly=CDFCBehaviors"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="430">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <DockPanel >
+            <DockPanel.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="10"/>
+                    <Setter Property="Width"  Value="40"/>
+                </Style>
+                <Style TargetType="{x:Type TextBlock}">
+                    <Setter Property="Margin" Value="10"/>
+                    <Setter Property="FontSize" Value="15"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
+                <Style TargetType="{x:Type Image}">
+                    <Setter Property="Height" Value="18"/>
+                </Style>
+            </DockPanel.Resources>
+            <Button x:Name="btnPreviousSector" Template="{StaticResource TransparentButtonTempate}" IsEnabled="{Binding BackPageCanExecute}"  Command="{Binding BackPageCommand}">
+                <Image Source="/CDFCVideoExactor;component/Images/FramesPreviewer/btnBackPage.png"/>
+            </Button>
+
+            <Button x:Name="btnNextSector"  Command="{Binding StepPageCommand}"  Template="{StaticResource TransparentButtonTempate}" >
+                <Image Source="/CDFCVideoExactor;component/Images/FramesPreviewer/btnStepPage.png"/>
+            </Button>
+            <StackPanel Margin="10,0,0,0" HorizontalAlignment="Right" Orientation="Horizontal" >
+                <TextBox Text="{Binding Page,UpdateSourceTrigger=PropertyChanged}" InputMethod.IsInputMethodEnabled="False"
+                         Margin="0,0,12,0"
+                             HorizontalAlignment="Left"  VerticalAlignment="Center" Width="100" >
+                    <i:Interaction.Behaviors>
+                        <behaviors:TextBoxInputRegExBehaviour MaxLength="5" RegularExpression="^\d+$" EmptyValue="0"/>
+                    </i:Interaction.Behaviors>
+                </TextBox>
+                <Button x:Name="btnEscape" Content="选定" Command="{Binding ConfirmCommand}" Width="87" Foreground="White" Style="{StaticResource SureBtnStyle}"/>
+            </StackPanel>
+        </DockPanel>
+        <ScrollViewer Grid.Row="1" Template="{StaticResource ScrollViewerControlTemplate}">
+            <ItemsControl ItemsSource="{Binding PreviewImgs}" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Image  Stretch="Fill" Width="240" Height="180" Margin="12,12,12,12"
+                               x:Name="linerImg" Source="{Binding ImagePath}" >
+                            <Image.Triggers>
+                                <EventTrigger RoutedEvent="Image.Loaded" >
+                                    <BeginStoryboard>
+                                        <Storyboard >
+                                            <DoubleAnimation Duration="0:0:0.5"
+                                                                 Storyboard.TargetName="linerImg"
+                                                                 Storyboard.TargetProperty="Opacity"
+                                                                 From="0.4" To="1"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Image.Triggers>
+                        </Image>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

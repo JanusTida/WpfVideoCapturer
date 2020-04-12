@@ -1,0 +1,250 @@
+﻿<UserControl x:Class="CDFCVideoExactor.Controls.HomePage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CDFCVideoExactor.Controls"
+             xmlns:metros="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:publicCvts="clr-namespace:CDFCConverters.Converters;assembly=CDFCConverters"
+             xmlns:cvtEnums="clr-namespace:CDFCConverter.Enums;assembly=CDFCConverters"
+             xmlns:viewmodels="clr-namespace:CDFCVideoExactor.ViewModels"
+             xmlns:enums="clr-namespace:CDFCVideoExactor.Enums"
+             xmlns:cvts="clr-namespace:CDFCConverters.Converters.HomePage;assembly=CDFCConverters"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="1440">
+    <UserControl.Resources>
+        <Style x:Key="EntranceBtnTemplate" TargetType="{x:Type Button}">
+            <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="VerticalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="metros:ControlsHelper.ContentCharacterCasing" Value="Upper"/>
+            <Setter Property="metros:ControlsHelper.CornerRadius" Value="3"/>
+            <Setter Property="FontFamily" Value="Microsoft YaHei" />
+            <Setter Property="FontSize" Value="{DynamicResource UpperCaseContentFontSize}"/>
+            <Setter Property="FontWeight" Value="Light"/>
+            <Setter Property="MinHeight" Value="25"/>
+            <Setter Property="Padding" Value="5,6"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Grid>
+                            <Border x:Name="Background" Background="{TemplateBinding Background}" CornerRadius="{Binding (metros:ControlsHelper.CornerRadius), Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Border x:Name="Border"  Background="{x:Null}" CornerRadius="{Binding (metros:ControlsHelper.CornerRadius), Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            <Border x:Name="DisabledVisualElement" Background="{DynamicResource ControlsDisabledBrush}" CornerRadius="{Binding (metros:ControlsHelper.CornerRadius), Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" IsHitTestVisible="False" Opacity="0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                            <metros:ContentControlEx x:Name="PART_ContentPresenter" ContentCharacterCasing="{Binding (metros:ControlsHelper.ContentCharacterCasing), RelativeSource={RelativeSource TemplatedParent}}" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <!--<Setter Property="Background" TargetName="Background" Value="{DynamicResource GrayBrush8}"/> -->
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <!--<Setter Property="Background" TargetName="Background" Value="{DynamicResource GrayBrush7}"/>-->
+                            </Trigger>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                <!-- <Setter Property="BorderBrush" TargetName="Border" Value="{DynamicResource ButtonMouseOverBorderBrush}"/>-->
+                                <!--<Setter Property="BorderThickness" TargetName="Border" Value="2"/> -->
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" TargetName="DisabledVisualElement" Value="0.7"/>
+                                <Setter Property="Opacity" TargetName="PART_ContentPresenter" Value="0.3"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="UnderlyTextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="Arial"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="#111111"/>
+            <Setter Property="TextDecorations">
+                <Setter.Value>
+                    <TextDecorationCollection>
+                        <TextDecoration PenOffset="5" PenOffsetUnit="Pixel" PenThicknessUnit="Pixel"/>
+                    </TextDecorationCollection>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}" x:Key="DetailTextBlockstyle">
+            <Setter Property="Foreground" Value="#303030"/>
+            <Setter Property="Margin" Value="0,14,0,0"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="TextWrapping" Value="WrapWithOverflow"/>
+            <Setter Property="FontFamily" Value="Microsoft YaHei UI"/>
+        </Style>
+
+
+        <!--转换器-->
+        <publicCvts:BoolToVisibilityConverter x:Key="boolToVisibilityConverter"/>
+        <cvts:MouseOverToOpacityConverter x:Key="MouseOverToOpacityConverter"/>
+        <Style x:Key="EntranceTitleTextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Opacity">
+                <Setter.Value>
+                    <Binding  RelativeSource ="{RelativeSource Mode=FindAncestor,AncestorType={x:Type Button}}"
+                              Path="IsMouseOver" Converter="{StaticResource MouseOverToOpacityConverter}" ConverterParameter="0.5"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="21"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="160"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="170"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.Resources>
+            <Style TargetType="{x:Type Image}">
+                <Setter Property="Stretch" Value="None"/>
+                <Setter Property="Cursor" Value="Hand"/>
+            </Style>
+            <Style TargetType="{x:Type TextBlock}">
+                <Setter Property="FontFamily" Value="Microsoft YaHei"/>
+            </Style>
+        </Grid.Resources>
+        <DockPanel Grid.Row="1" Margin="0,0,0,56" Grid.ColumnSpan="3" Visibility="{Binding WatchVisible}" >
+            <StackPanel HorizontalAlignment="Center" Margin="0,15,0,0" Orientation="Horizontal">
+                <TextBlock Text="请选择设备类型" FontSize="24" DockPanel.Dock="Top" FontWeight="Light"/>
+                <Image Source="/CDFCVideoExactor;component/Images/HomePage/btnWatch.png" Margin="18,0" ></Image>
+            </StackPanel>
+        </DockPanel>
+        <Button Style="{DynamicResource EntranceBtnTemplate}"   Grid.Row="2" Margin="20,0,0,0" 
+                Command="{Binding StepIntoEntranceCommand}" >
+            <Button.CommandParameter>
+                <enums:EntranceType>Capturer</enums:EntranceType>
+            </Button.CommandParameter>
+            <StackPanel Orientation="Horizontal"  >
+                <Image Visibility="{Binding 
+                            RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Button},
+                            Path=IsMouseOver,
+                            ConverterParameter=2,
+                            Converter={StaticResource boolToVisibilityConverter}}" 
+                               Source="/CDFCVideoExactor;component/Images/HomePage/btnWatcher.png" />
+                <Image Visibility="{Binding 
+                            RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Button},
+                            Path=IsMouseOver,
+                            Converter={StaticResource boolToVisibilityConverter}}"  
+                               Source="/CDFCVideoExactor;component/Images/HomePage/btnWatcherActive.png" />
+                <StackPanel  Margin="42,0"  >
+                    <TextBlock Text="监控视频取证" Style="{StaticResource EntranceTitleTextBlockStyle}">
+
+                    </TextBlock>
+                    <TextBlock Style="{StaticResource UnderlyTextBlockStyle}" Text="Monitoring equipment" Margin="0,11,0,0" />
+                    <WrapPanel>
+                        <TextBlock Text="针对各种监控品牌录像机的视频录像提取"  Style="{StaticResource DetailTextBlockstyle}"/>
+                    </WrapPanel>
+                </StackPanel>
+            </StackPanel>
+        </Button>
+        <Button Margin="20,0,0,0" Grid.Column="2"   Grid.Row="2" Style="{DynamicResource EntranceBtnTemplate}"
+                     Command="{Binding StepIntoEntranceCommand}" >
+            <Button.CommandParameter>
+                <enums:EntranceType>MultiMedia</enums:EntranceType>
+            </Button.CommandParameter>
+
+            <StackPanel Orientation="Horizontal">
+                <Image 
+                            Visibility="{Binding 
+                            RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Button},
+                            Path=IsMouseOver,
+                            Converter={StaticResource boolToVisibilityConverter},
+                            ConverterParameter=2}" 
+                            Source="/CDFCVideoExactor;component/Images/HomePage/btnMultiMedia.png"/>
+                <Image Visibility="{Binding 
+                            RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Button},
+                            Path=IsMouseOver,
+                            Converter={StaticResource boolToVisibilityConverter}}"
+                               Source="/CDFCVideoExactor;component/Images/HomePage/btnMultiMediaActive.png" />
+                <StackPanel  Margin="42,0" VerticalAlignment="Top">
+                    <TextBlock Text="多媒体视频取证" Style="{StaticResource EntranceTitleTextBlockStyle}"/>
+                    <TextBlock Style="{StaticResource UnderlyTextBlockStyle}"  Text="Multimedia devices" Margin="0,11,0,0" FontSize="16"/>
+                    <WrapPanel>
+                        <TextBlock Text="针对索尼，松下，佳能等品牌多媒体录像机，行车记录GoPro等多媒体录像设备的视频录像提取，视频重组恢复和取证分析"  Width="310" Style="{StaticResource DetailTextBlockstyle}" />
+                    </WrapPanel>
+
+                </StackPanel>
+            </StackPanel>
+        </Button>
+        <Button  Grid.Row="4" Grid.Column="0"  Style="{DynamicResource EntranceBtnTemplate}" Margin="20,0,0,0"
+                     Command="{Binding StepIntoEntranceCommand}" >
+            <Button.CommandParameter>
+                <enums:EntranceType>Mobile</enums:EntranceType>
+            </Button.CommandParameter>
+
+            <StackPanel Orientation="Horizontal">
+                <Image 
+                            Visibility="{Binding 
+                            RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Button},
+                            Path=IsMouseOver,
+                            Converter={StaticResource boolToVisibilityConverter},
+                            ConverterParameter=2}" 
+                            Source="/CDFCVideoExactor;component/Images/HomePage/btnPhone.png" />
+                <Image 
+                            Visibility="{Binding 
+                            RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Button},
+                            Path=IsMouseOver,
+                            Converter={StaticResource boolToVisibilityConverter}}"
+                            Source="/CDFCVideoExactor;component/Images/HomePage/btnPhoneActive.png" />
+
+                <StackPanel  Margin="75,0,0,0">
+                    <TextBlock Text="手机视频取证"  Style="{StaticResource EntranceTitleTextBlockStyle}" />
+                    <TextBlock Style="{StaticResource UnderlyTextBlockStyle}" Text="Mobile Devices" Margin="0,11,0,0" FontSize="16"/>
+                    <WrapPanel>
+                        <TextBlock Width="310" Text="针对各类品牌手机视频的提取，重组，恢复和分析，目前只支持手机镜像扫描" Style="{DynamicResource DetailTextBlockstyle}" />
+                    </WrapPanel>
+                </StackPanel>
+            </StackPanel>
+        </Button>
+        <Button Margin="20,0,0,0"   Grid.Column="2"  Grid.Row="4" Style="{DynamicResource EntranceBtnTemplate}"
+                      Command="{Binding StepIntoEntranceCommand}" >
+            <Button.CommandParameter>
+                <enums:EntranceType>PC</enums:EntranceType>
+            </Button.CommandParameter>
+            <StackPanel Orientation="Horizontal">
+                <Image
+                            Visibility="{Binding 
+                            RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Button},
+                            Path=IsMouseOver,
+                            Converter={StaticResource boolToVisibilityConverter},
+                            ConverterParameter=2}" 
+                            Source="/CDFCVideoExactor;component/Images/HomePage/btnTV.png" />
+                <Image 
+                            Visibility="{Binding 
+                            RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=Button},
+                            Path=IsMouseOver,
+                            Converter={StaticResource boolToVisibilityConverter}}" 
+                            Source="/CDFCVideoExactor;component/Images/HomePage/btnTVActive.png" 
+                            />
+                <StackPanel Margin="42,0"  >
+                    <TextBlock Text="PC视频取证"  Style="{StaticResource EntranceTitleTextBlockStyle}" />
+                    <TextBlock  Text="Digital equipment" Style="{StaticResource UnderlyTextBlockStyle}" Margin="0,11,0,0" FontSize="16"/>
+                    <WrapPanel>
+                        <TextBlock Width="310" Text="针对普通电脑上各种视频的提取，视频重组恢复和取证分析
+                                           " Style="{DynamicResource DetailTextBlockstyle}" />
+                    </WrapPanel>
+                </StackPanel>
+            </StackPanel>
+        </Button>
+        <DockPanel Grid.Row="5" HorizontalAlignment="Center" Grid.ColumnSpan="3">
+            <TextBlock Text="黑洞视频取证分析系统1.0.0.0" VerticalAlignment="Bottom" 
+                       HorizontalAlignment="Center" Margin="0,0,0,22"
+                       FontSize="18"/>
+        </DockPanel>
+        <!-- <metros:ProgressRing Grid.Column="1" Style="{DynamicResource ProgressringTemplate}"  />-->
+    </Grid>
+
+</UserControl>

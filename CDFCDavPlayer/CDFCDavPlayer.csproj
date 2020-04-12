@@ -1,0 +1,228 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishTrimmed>true</PublishTrimmed>
+    <RuntimeIdentifier>win-x86</RuntimeIdentifier>
+    
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="aacdec.dll" />
+    <None Remove="adpcmdec.dll" />
+    <None Remove="amrdec.dll" />
+    <None Remove="dhplay.dll" />
+    <None Remove="fisheye.dll" />
+    <None Remove="g7221dec.dll" />
+    <None Remove="g729dec.dll" />
+    <None Remove="h264dec.dll" />
+    <None Remove="H264Parser.dll" />
+    <None Remove="h26ldec.dll" />
+    <None Remove="hevcdec.dll" />
+    <None Remove="HevcParser.dll" />
+    <None Remove="HWDec.dll" />
+    <None Remove="Images\Add_Normal.png" />
+    <None Remove="Images\Add_Tap.png" />
+    <None Remove="Images\BtnClose.png" />
+    <None Remove="Images\BtnClose_Hover.png" />
+    <None Remove="Images\BtnMax_Maximumed.png" />
+    <None Remove="Images\BtnMax_Normal.png" />
+    <None Remove="Images\BtnMin.png" />
+    <None Remove="Images\Btn_GoBack.png" />
+    <None Remove="Images\Btn_GoForward.png" />
+    <None Remove="Images\Btn_Mute.png" />
+    <None Remove="Images\Btn_Pause.png" />
+    <None Remove="Images\Btn_Play.png" />
+    <None Remove="Images\Btn_Stop.png" />
+    <None Remove="Images\CommandBtn.png" />
+    <None Remove="Images\Delete_Normal.png" />
+    <None Remove="Images\Delete_Tap.png" />
+    <None Remove="Images\Main_Icon.png" />
+    <None Remove="Images\Play_ControlPanel.png" />
+    <None Remove="Images\Slider_Back.png" />
+    <None Remove="Images\Slider_Back2.png" />
+    <None Remove="Images\Slider_Icon.png" />
+    <None Remove="Images\Slider_Value.png" />
+    <None Remove="Images\VideoItemListBanner.png" />
+    <None Remove="Images\Volume_Back.png" />
+    <None Remove="Images\Volume_Pin.png" />
+    <None Remove="Images\Volume_Value.png" />
+    <None Remove="MCL_FPTZ.dll" />
+    <None Remove="mjpegdec.dll" />
+    <None Remove="mp2dec.dll" />
+    <None Remove="mp3dec.dll" />
+    <None Remove="mpeg4dec.dll" />
+    <None Remove="mpeg4enc.dll" />
+    <None Remove="oggdec.dll" />
+    <None Remove="postproc.dll" />
+    <None Remove="svac_dec.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="aacdec.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="adpcmdec.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="amrdec.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="dhplay.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="fisheye.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="g7221dec.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="g729dec.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="h264dec.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="H264Parser.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="h26ldec.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="hevcdec.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HevcParser.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="HWDec.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="MCL_FPTZ.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="mjpegdec.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="mp2dec.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="mp3dec.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="mpeg4dec.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="mpeg4enc.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="oggdec.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="postproc.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="svac_dec.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="CDFC.Common" Version="0.1.3.8" />
+    <PackageReference Include="ControlzEx" Version="4.2.0" />
+    <PackageReference Include="MahApps.Metro" Version="2.0.0-alpha0660" />
+    <PackageReference Include="Ookii.Dialogs.Wpf" Version="1.1.0" />
+    <PackageReference Include="Prism.Core" Version="7.2.0.1422" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
+    <PackageReference Include="WinInsider.Prism.Mef.Wpf" Version="7.2.0.1375" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CDFCMessageBoxes\CDFCMessageBoxes.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Add_Normal.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Add_Tap.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\BtnClose.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\BtnClose_Hover.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\BtnMax_Maximumed.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\BtnMax_Normal.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\BtnMin.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Btn_GoBack.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Btn_GoForward.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Btn_Mute.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Btn_Pause.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Btn_Play.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Btn_Stop.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\CommandBtn.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Delete_Normal.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Delete_Tap.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Main_Icon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Play_ControlPanel.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Slider_Back.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Slider_Back2.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Slider_Icon.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Slider_Value.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\VideoItemListBanner.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Volume_Back.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Volume_Pin.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Volume_Value.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Main_Icon.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  
+</Project>
