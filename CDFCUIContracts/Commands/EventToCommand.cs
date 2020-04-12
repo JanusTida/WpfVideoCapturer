@@ -307,6 +307,7 @@ namespace CDFCUIContracts.Commands {
         protected override void Invoke(object parameter) {
             if (AssociatedElementIsDisabled()
                 && !AlwaysInvokeCommand) {
+
                 return;
             }
 
