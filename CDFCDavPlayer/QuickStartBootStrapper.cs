@@ -9,6 +9,7 @@ using System.ComponentModel.Composition.Hosting;
 using CDFCDavPlayer.Windows;
 using Prism.Mef;
 using Prism.Ioc;
+using CDFCDavPlayer.Views;
 
 namespace CDFCDavPlayer {
     public class QuickStartBootStrapper : MefBootstrapper {

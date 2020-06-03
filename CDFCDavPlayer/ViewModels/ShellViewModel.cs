@@ -15,6 +15,7 @@ using System.IO;
 using static CDFCUIContracts.Helpers.ApplicationHelper;
 using Prism.Mvvm;
 using Prism.Commands;
+using System.Reflection;
 
 namespace CDFCDavPlayer.ViewModels {
     [Export(typeof(IShellViewModel))]
@@ -22,31 +23,11 @@ namespace CDFCDavPlayer.ViewModels {
         public ShellViewModel() {
             
         }
-        private DelegateCommand _contentRenderedCommand;
-        public DelegateCommand ContentRenderedCommand => _contentRenderedCommand ??
-            (_contentRenderedCommand = new DelegateCommand(
-                () => {
-                    if (StartUpHelper.StartUpArgs != null) {
-                        var args = StartUpHelper.StartUpArgs.Args;
-                        foreach (var arg in args) {
-                            try {
-                                if (File.Exists(arg)) {
-                                    AddSong(arg);
-                                }
-                            }
-                            catch {
 
-                            }
-                        }
-                    }
-                    ThreadPool.QueueUserWorkItem(cb => {
-                        while (true) {
-                            CheckSongNotified();
-                            Thread.Sleep(1000);
-                        }
-                    });
-                }
-            ));
+        /// <summary>
+        /// 请求窗体聚焦;
+        /// </summary>
+        public event EventHandler ActivateRequest;
 
         /// <summary>
         /// 检查进程内存通知叠加;
@@ -56,6 +37,7 @@ namespace CDFCDavPlayer.ViewModels {
             if (args != null && args.Length != 0) {
                 AppInvoke(() => {
                     AddSong(args[0]);
+                    ActivateRequest?.Invoke(this, EventArgs.Empty);
                 });
             }
         }
@@ -67,6 +49,7 @@ namespace CDFCDavPlayer.ViewModels {
             }
             set {
                 SetProperty(ref _player, value);
+                RaisePropertyChanged(nameof(Title));
             }
         }
 
@@ -142,6 +125,58 @@ namespace CDFCDavPlayer.ViewModels {
                     Thread.Sleep(1000);
                 }
             });
+        }
+
+        public void RaiseOnLoad()
+        {
+            if (StartUpHelper.StartUpArgs != null)
+            {
+                var args = StartUpHelper.StartUpArgs.Args;
+                foreach (var arg in args)
+                {
+                    try
+                    {
+                        if (File.Exists(arg))
+                        {
+                            AddSong(arg);
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }
+            ThreadPool.QueueUserWorkItem(cb => {
+                while (true)
+                {
+                    CheckSongNotified();
+                    Thread.Sleep(1000);
+                }
+            });
+        }
+
+        public void RaiseOnDrop(IDataObject dataObject)
+        {
+            if(dataObject == null)
+            {
+                return;
+            }
+
+            try
+            {
+                var files = (string[])dataObject.GetData(DataFormats.FileDrop);
+                foreach (var file in files)
+                {
+                    AddSong(file);
+                }
+                ActivateRequest?.Invoke(this, EventArgs.Empty);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private bool _isProcessing;
@@ -327,16 +362,32 @@ namespace CDFCDavPlayer.ViewModels {
 
         //        }
         //    ));
-        private string _title;
+#if 流火
+        private const string _softName = "流火视频播放器";
+#else
+        private const string _softName = "黑洞视频播放器";
+#endif
+        private string SoftName
+        {
+            get
+            {
+                var asm = Assembly.GetExecutingAssembly();
+                var asmVersion = asm.GetName().Version;
+                return $"{_softName}v{asmVersion.Major}.{asmVersion.Minor}";
+            }
+        }
+
         public string Title {
             get {
-                if (_title == null) {
-                    _title = System.Configuration.ConfigurationManager.AppSettings["SoftName"];
+                if(Player != null)
+                {
+                    return $"{SoftName}-{Path.GetFileName(Player.FileName)}";
                 }
-                return _title;
+                return SoftName;
             }
-            set => SetProperty(ref _title, value);
+            
         }
+
     }
 
     public partial class ShellViewModel {
@@ -364,6 +415,12 @@ namespace CDFCDavPlayer.ViewModels {
     }
 
     public interface IShellViewModel {
-        string Title { get; set; }
+        string Title { get; }
+
+        void RaiseOnLoad();
+
+        void RaiseOnDrop(IDataObject dataObject);
+
+        event EventHandler ActivateRequest;
     }
 }

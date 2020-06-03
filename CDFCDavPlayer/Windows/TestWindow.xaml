@@ -1,9 +1,10 @@
-﻿<Window x:Class="CDFCDavPlayer.Windows.TestWindow"
+﻿<metros:MetroWindow x:Class="CDFCDavPlayer.Windows.TestWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CDFCDavPlayer.Windows"
+        xmlns:metros="http://metro.mahapps.com/winfx/xaml/controls"
         mc:Ignorable="d" AllowDrop="True" Drop="Window_Drop"
         Title="TestWindow" Height="300" Width="300">
     <StackPanel Background="#131313">
@@ -26,4 +27,4 @@
             </StackPanel>
         </Border>
     </StackPanel>
-</Window>
+</metros:MetroWindow>

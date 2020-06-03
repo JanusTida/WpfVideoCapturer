@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MahApps.Metro.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
@@ -18,7 +19,8 @@ namespace CDFCDavPlayer.Windows {
     /// Interaction logic for TestWindow.xaml
     /// </summary>
     [Export]
-    public partial class TestWindow : Window {
+    public partial class TestWindow : MetroWindow
+    {
         public TestWindow() {
             InitializeComponent();
         }

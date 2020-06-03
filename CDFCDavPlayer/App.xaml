@@ -9,6 +9,8 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" x:Name="metroControls" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
 
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Themes/Light.Blue.xaml" />
+
                 <!--Language Settings-->
                 <ResourceDictionary Source="pack://application:,,,/CDFCDavPlayer;component/Languages/zh_CN/CDFCDavPlayer.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/CDFCDavPlayer;component/Themes/Generic.xaml" />

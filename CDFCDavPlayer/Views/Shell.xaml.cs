@@ -20,18 +20,15 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace CDFCDavPlayer.Windows {
+namespace CDFCDavPlayer.Views {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     [Export]
     public partial class Shell : MetroWindow, IPartImportsSatisfiedNotification {
 #pragma warning disable 0649 // Imported by MEF
-        [Import(AllowRecomposition =false)]
-        private IShellViewModel vm;
-
         [Import(AllowRecomposition = false)]
-        private IModuleManager moduleManager;
+        private IShellViewModel vm;
 #pragma warning restore 0649
 
         public Shell() {
@@ -49,9 +46,15 @@ namespace CDFCDavPlayer.Windows {
 
 
         public void OnImportsSatisfied() {
-            DataContext = vm;   
+            DataContext = vm;
+            vm.ActivateRequest += Vm_ActivateRequest;
         }
-        
+
+        private void Vm_ActivateRequest(object sender, EventArgs e)
+        {
+            this.Activate();
+        }
+
         private void btnCollapse_Click(object sender, RoutedEventArgs e) {
             collaPanel.IsCollapsed = false;
         }
@@ -60,7 +63,24 @@ namespace CDFCDavPlayer.Windows {
             collaPanel.IsCollapsed = true;
         }
 
-       
+
+        private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            vm.RaiseOnLoad();
+        }
+
+        private void MetroWindow_Drop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                vm.RaiseOnDrop(e.Data);
+            }
+            catch(Exception ex)
+            {
+
+            }
+            
+        }
     }
     
 }
