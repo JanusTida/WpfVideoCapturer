@@ -28,7 +28,7 @@ namespace CDFCDavPlayer.ViewModels {
         /// 请求窗体聚焦;
         /// </summary>
         public event EventHandler ActivateRequest;
-
+        
         /// <summary>
         /// 检查进程内存通知叠加;
         /// </summary>
@@ -364,6 +364,8 @@ namespace CDFCDavPlayer.ViewModels {
         //    ));
 #if 流火
         private const string _softName = "流火视频播放器";
+#elif RH8500
+        private const string _softName = "RH8500-播放器";
 #else
         private const string _softName = "黑洞视频播放器";
 #endif

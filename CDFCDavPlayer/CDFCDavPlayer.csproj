@@ -15,17 +15,26 @@
     <Product>黑洞视频播放器</Product>
     <Nullable>disable</Nullable>
     <AssemblyName>CDFCDavPlayer</AssemblyName>
-    <Configurations>Debug;Release;流火</Configurations> 
+    <Configurations>Debug;Release;流火;RH-8500</Configurations> 
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)'=='流火'">
     <PackageId>流火视频播放器</PackageId>
     <Product>流火视频播放器</Product>
     <DefineConstants>流火</DefineConstants>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='RH-8500'">
+    <PackageId>RH-8500播放器</PackageId>
+    <Product>RH-8500播放器</Product>
+    <DefineConstants>RH8500</DefineConstants>
+  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <WarningLevel>3</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='流火|AnyCPU'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RH-8500|AnyCPU'">
     <DebugType>none</DebugType>
     <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>

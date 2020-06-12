@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <UseWPF>true</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
-    <Configurations>Debug;Release;流火</Configurations>
+    <Configurations>Debug;Release;流火;RH-8500</Configurations>
   </PropertyGroup>
 
   <ItemGroup>
