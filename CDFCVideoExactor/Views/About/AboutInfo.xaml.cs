@@ -26,6 +26,8 @@ namespace CDFCVideoExactor.Views.About {
         private static readonly string originSite = "http://www.cflab.net";
         private void OriSite_HyperLink_Click(object sender, RoutedEventArgs e) {
             Process.Start(originSite);
+
+            
         }
     }
 }

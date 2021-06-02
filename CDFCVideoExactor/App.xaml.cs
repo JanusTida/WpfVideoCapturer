@@ -14,6 +14,7 @@ namespace CDFCVideoExactor {
     /// </summary>
     public partial class App : Application {
         public App() {
+            
             DispatcherUnhandledException += (sender, e) => {
                 EventLogger.Logger.WriteLine("主线程错误:" + e.Exception.Message);
             };

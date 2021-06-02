@@ -107,8 +107,9 @@ namespace CDFCDavPlayer.Player {
             }
 
             try {
-                PLAY_PlaySound(Port);
-                return PLAY_Play(Port, PlayerHandle);
+                var s = PLAY_PlaySound(Port);
+                s = PLAY_Play(Port, PlayerHandle);
+                return s;
             }
             catch(Exception ex) {
                 EventLogger.Logger.WriteLine($"{nameof(DHPlayer)}->{nameof(Play)}:{ex.Message}");

@@ -14,6 +14,7 @@ namespace CDFCConverters.Converters {
             get {
                 return staticInstance ??
                     (staticInstance = new BoolToVisibilityConverter());
+                
             }
         }
         /// <summary>

@@ -148,7 +148,7 @@ namespace CDFCEntities {
             long hg = 0;
             var size = GetFileSizeEx(handle2,out hg);
             var fs2 = new FileStream(handle2, FileAccess.Read );
-
+            
             fs2.Position = 123;
             var pos = GetFilePointerEx(handle2);
             ComObject co = ComObject.LocalObject;
