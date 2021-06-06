@@ -38,7 +38,7 @@ namespace CDFCDavPlayer.Player {
         /// <param name="davName">dav文件名</param>
         public DHPlayer(string fileName) {
             var portPtr = Marshal.AllocHGlobal(Marshal.SizeOf(typeof(int)));
-            Marshal.WriteInt32(portPtr,-1);
+            Marshal.WriteInt64(portPtr,-1);
             try {
                 var succeed = PLAY_GetFreePort(portPtr);
                 if (succeed) {
@@ -205,7 +205,7 @@ namespace CDFCDavPlayer.Player {
     }
     public partial class DHPlayer {
         private const string SnapShoterPath = "FFPlayer/cdfcplayer2.exe";
-        private const string DhPath = "dhplay.dll";
+        private const string DhPath = "DaHua/dhplay.dll";
         [DllImport(DhPath, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         private static extern uint PLAY_GetFileTotalFrames(int nPort);
         [DllImport(DhPath, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]

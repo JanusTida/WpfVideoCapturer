@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CDFCDavPlayer.Views"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="120" d:DesignWidth="1000">
@@ -15,8 +16,10 @@
             <StackPanel.Resources>
                 <Style TargetType="Button" BasedOn="{StaticResource TransParentButton}"/>
             </StackPanel.Resources>
-            <Slider Margin="0,12" Style="{DynamicResource PlayerSlider}" Maximum="{Binding MaxTimeLength}" x:Name="Pro_Slider" MouseLeave="Pro_Slider_MouseLeave" MouseUp="Pro_Slider_MouseUp"
-                    Value="{Binding PlayValue}" PreviewMouseDown="Pro_Slider_MouseDown"  />
+            <Slider Margin="0,12" Style="{StaticResource PlayerSlider}"  Maximum="{Binding MaxTimeLength}" x:Name="Pro_Slider" MouseLeave="Pro_Slider_MouseLeave" MouseUp="Pro_Slider_MouseUp"
+                    Value="{Binding PlayValue}" PreviewMouseDown="Pro_Slider_MouseDown"  >
+               
+            </Slider>
             <Grid>
                 <DockPanel >
                     <Button Style="{StaticResource TransParentButton}" Command="{Binding MuteCommand}" >

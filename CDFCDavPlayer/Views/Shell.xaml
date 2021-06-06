@@ -10,7 +10,7 @@
         xmlns:views="clr-namespace:CDFCDavPlayer.Views" WindowTransitionsEnabled="False"
         xmlns:commands="clr-namespace:CDFCUIContracts.Commands;assembly=CDFCUIContracts" AllowDrop="True" 
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" FontFamily="Microsoft YaHei UI" 
-        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300" WindowTitleBrush="#3c3c3c" TitleBarHeight="36"
+        mc:Ignorable="d" d:DesignWidth="1020" d:DesignHeight="300" WindowTitleBrush="#3c3c3c" TitleBarHeight="36"
          Drop="MetroWindow_Drop" Loaded="MetroWindow_Loaded"
          MinHeight="450" MinWidth="600"  BorderThickness="1" BorderBrush="Black" >
     <metros:MetroWindow.TitleTemplate>
